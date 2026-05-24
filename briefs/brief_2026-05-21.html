@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Daily Brief — 2026-05-21</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background-color: #f4f0e8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      color: #121212;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    /* MASTHEAD */
+    .masthead {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      height: 220px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .masthead-bg {
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1400&q=80');
+      background-size: cover;
+      background-position: center 40%;
+      filter: grayscale(100%);
+    }
+
+    .masthead-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .masthead-eyebrow {
+      font-family: 'Source Serif 4', serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .masthead h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .masthead-rule {
+      width: 60px;
+      height: 1px;
+      background: #aaa;
+      margin: 12px auto;
+    }
+
+    .masthead-date {
+      font-family: 'Source Serif 4', serif;
+      font-size: 12px;
+      color: #ccc;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* SECTION RULES */
+    .section-divider {
+      border: none;
+      border-top: 3px solid #121212;
+      margin: 32px 0 0;
+    }
+
+    .section-divider-thin {
+      border: none;
+      border-top: 1px solid #c8c0b0;
+      margin: 28px 0;
+    }
+
+    /* TAG SECTIONS */
+    .tag-section { margin-bottom: 8px; }
+
+    .tag-label {
+      font-family: 'Source Serif 4', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #555;
+      padding: 10px 0 10px;
+      border-top: 3px double #121212;
+      margin-top: 32px;
+    }
+
+    /* ARTICLE CARDS */
+    .article-card {
+      padding: 16px 0;
+      border-bottom: 1px solid #d8d0c0;
+    }
+
+    .article-card:last-child { border-bottom: none; }
+
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #121212;
+      text-decoration: none;
+      line-height: 1.3;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .article-title:hover { text-decoration: underline; }
+
+    .article-meta {
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-family: 'Source Serif 4', serif;
+    }
+
+    .article-meta a { color: #888; text-decoration: none; }
+    .article-meta a:hover { text-decoration: underline; color: #333; }
+
+    .article-summary {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.7;
+      font-family: 'Source Serif 4', serif;
+      font-style: italic;
+    }
+
+    /* WORTH READING */
+    .worth-reading {
+      background: #121212;
+      color: #f4f0e8;
+      padding: 28px 32px;
+      margin: 40px 0;
+    }
+
+    .worth-reading .tag-label {
+      color: #aaa;
+      border-top: 3px double #555;
+      margin-top: 0;
+    }
+
+    .worth-reading a {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      line-height: 1.3;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .worth-reading a:hover { text-decoration: underline; }
+    .worth-reading .meta { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .worth-reading p { font-size: 14px; color: #ccc; font-style: italic; line-height: 1.6; }
+
+    /* RATING */
+    .rating { border-top: 3px double #121212; padding-top: 28px; margin-top: 40px; }
+    .rating .tag-label { border-top: none; margin-top: 0; padding-top: 0; margin-bottom: 16px; }
+    .rating-buttons { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .rating-buttons button {
+      padding: 9px 18px;
+      font-size: 12px;
+      font-family: 'Source Serif 4', serif;
+      border: 1px solid #bbb;
+      background: transparent;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.15s;
+      color: #121212;
+    }
+    .rating-buttons button:hover, .rating-buttons button.selected {
+      background: #121212;
+      color: #f4f0e8;
+      border-color: #121212;
+    }
+    textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-family: 'Source Serif 4', serif;
+      border: 1px solid #c8c0b0;
+      background: #faf8f4;
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 12px;
+      color: #121212;
+    }
+    .save-btn {
+      padding: 10px 28px;
+      font-size: 12px;
+      font-family: 'Source Serif 4', serif;
+      background: #121212;
+      color: #f4f0e8;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .save-btn:hover { background: #333; }
+    .saved-msg { font-size: 13px; color: #888; margin-top: 10px; display: none; font-style: italic; }
+
+    /* ARCHIVE */
+    .archive { margin-top: 48px; border-top: 3px double #121212; padding-top: 28px; }
+    .archive .tag-label { border-top: none; margin-top: 0; padding-top: 0; margin-bottom: 16px; }
+    .archive ul { list-style: none; }
+    .archive ul li {
+      font-size: 14px;
+      font-family: 'Source Serif 4', serif;
+      padding: 10px 0;
+      border-bottom: 1px solid #d8d0c0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .archive ul li a { color: #121212; text-decoration: none; }
+    .archive ul li a:hover { text-decoration: underline; }
+    .archive ul li span { font-size: 12px; color: #aaa; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="masthead-overlay">
+      <div class="masthead-eyebrow">Intelligence &amp; Analysis</div>
+      <h1>The Daily Brief</h1>
+      <div class="masthead-rule"></div>
+      <div class="masthead-date">2026-05-21</div>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+
+    
+    <div class="tag-section">
+      <div class="tag-label">Middle East / Gaza / Israel</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.aljazeera.com/opinions/2026/5/21/israels-arrogance-is-becoming-the-evidence-in-the-case-against-it?traffic_source=rss" target="_blank">Israel's arrogance is becoming the evidence in the case against it</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.aljazeera.com/opinions/2026/5/21/israels-arrogance-is-becoming-the-evidence-in-the-case-against-it?traffic_source=rss" target="_blank">Al Jazeera</a>
+        </div>
+        <div class="article-summary">Ben-Gvir's self-incriminating video of flotilla activists signals growing international legal exposure for Israel amid the Gaza conflict.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.aljazeera.com/video/newsfeed/2026/5/21/activists-take-part-in-a-land-convoy-from-libya-to-bring-aid-to-gaza?traffic_source=rss" target="_blank">Activists take part in a land convoy from Libya to bring aid to Gaza</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.aljazeera.com/video/newsfeed/2026/5/21/activists-take-part-in-a-land-convoy-from-libya-to-bring-aid-to-gaza?traffic_source=rss" target="_blank">Al Jazeera</a>
+        </div>
+        <div class="article-summary">Alternative aid routes to Gaza are being attempted by land as sea access remains contested, reflecting the depth of the ongoing humanitarian crisis.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">Iran / Middle East Geopolitics</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.nytimes.com/2026/05/21/world/middleeast/iran-revolutionary-guards.html" target="_blank">The Hard-Line Military Fraternity Running Iran</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.nytimes.com/2026/05/21/world/middleeast/iran-revolutionary-guards.html" target="_blank">New York Times</a>
+        </div>
+        <div class="article-summary">The IRGC's grip on Iranian decision-making has direct implications for regional stability and global risk pricing.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.economist.com/finance-and-economics/2026/05/21/the-insurers-on-the-hook-for-war-in-iran" target="_blank">The insurers on the hook for war in Iran</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.economist.com/finance-and-economics/2026/05/21/the-insurers-on-the-hook-for-war-in-iran" target="_blank">The Economist</a>
+        </div>
+        <div class="article-summary">War risk in Iran is hammering certain insurers and threatening wider market contagion, a critical consideration for global finance and real estate portfolios with international exposure.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">Global Macro / Inflation</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.economist.com/finance-and-economics/2026/05/19/investors-fear-another-surge-in-inflation" target="_blank">Investors fear another surge in inflation</a>
+        <div class="article-meta">
+          2026-05-19 &mdash; <a href="https://www.economist.com/finance-and-economics/2026/05/19/investors-fear-another-surge-in-inflation" target="_blank">The Economist</a>
+        </div>
+        <div class="article-summary">Despite inflation fears, low uptake of inflation-protected bonds raises questions about investor behavior and hedging strategy in current markets.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.economist.com/finance-and-economics/2026/05/21/the-other-china-shock" target="_blank">The other China shock</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.economist.com/finance-and-economics/2026/05/21/the-other-china-shock" target="_blank">The Economist</a>
+        </div>
+        <div class="article-summary">China's manufacturing dominance is crowding out global competitors, with major implications for trade flows, supply chains, and emerging market investment.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.economist.com/finance-and-economics/2026/05/21/how-should-economists-treat-morality" target="_blank">How should economists treat morality?</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.economist.com/finance-and-economics/2026/05/21/how-should-economists-treat-morality" target="_blank">The Economist</a>
+        </div>
+        <div class="article-summary">A deeper look at whether moral considerations should be integrated into economic models, relevant to ESG investing and policy frameworks.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">US Housing & Real Estate</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.economist.com/finance-and-economics/2026/05/20/economics-lessons-from-home-depot" target="_blank">Economics lessons from Home Depot</a>
+        <div class="article-meta">
+          2026-05-20 &mdash; <a href="https://www.economist.com/finance-and-economics/2026/05/20/economics-lessons-from-home-depot" target="_blank">The Economist</a>
+        </div>
+        <div class="article-summary">Home Depot's performance serves as a real-time barometer for the American housing market, revealing trends in consumer spending and housing turnover that matter for real estate investors.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">Lebanon — Business & Society</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://the961.com/cma-cgm-acquired-fattal-group/" target="_blank">Shipping Giant CMA CGM Just Acquired Fattal Group</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://the961.com/cma-cgm-acquired-fattal-group/" target="_blank">The 961</a>
+        </div>
+        <div class="article-summary">French shipping giant CMA CGM's full acquisition of Lebanon's Fattal Group signals continued foreign appetite for Lebanese distribution assets despite the country's economic fragility.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://the961.com/isf-arrest-rental-scam-displaced/" target="_blank">ISF Just Arrested The Suspect Behind Rental Scam Targeting Displaced Families</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://the961.com/isf-arrest-rental-scam-displaced/" target="_blank">The 961</a>
+        </div>
+        <div class="article-summary">Rental fraud targeting displaced families highlights the vulnerabilities in Lebanon's informal housing market and the risks of investing or renting in a disrupted real estate environment.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://the961.com/lebanon-ban-social-media-under-14/" target="_blank">There's A New Bill In Lebanon To Ban Social Media For Those Under 14</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://the961.com/lebanon-ban-social-media-under-14/" target="_blank">The 961</a>
+        </div>
+        <div class="article-summary">Lebanon's proposed social media restrictions for minors mirror a global regulatory trend that could affect digital advertising and platform business models in the region.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://the961.com/lebanese-page-expose-texting-driving/" target="_blank">This New Lebanese Page Will Now Expose You For Texting & Driving</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://the961.com/lebanese-page-expose-texting-driving/" target="_blank">The 961</a>
+        </div>
+        <div class="article-summary">A grassroots Instagram accountability campaign reflects Lebanon's continued reliance on civil society and social media in the absence of strong institutional enforcement.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">M&A / Shipping & Logistics</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://the961.com/cma-cgm-acquired-fattal-group/" target="_blank">Shipping Giant CMA CGM Just Acquired Fattal Group</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://the961.com/cma-cgm-acquired-fattal-group/" target="_blank">The 961</a>
+        </div>
+        <div class="article-summary">CMA CGM's 100% acquisition of Fattal Group expands the shipping conglomerate's footprint in MENA distribution, a notable strategic M&A move with regional supply chain implications.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">UK Politics</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.aljazeera.com/video/the-take-2/2026/5/21/aje-onl-tt_gbr_starmercoup_av_v2-200526?traffic_source=rss" target="_blank">The implosion of Keir Starmer's Labour</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.aljazeera.com/video/the-take-2/2026/5/21/aje-onl-tt_gbr_starmercoup_av_v2-200526?traffic_source=rss" target="_blank">Al Jazeera</a>
+        </div>
+        <div class="article-summary">Political instability in the UK — potentially its seventh prime minister in a decade — creates uncertainty for GBP, UK sovereign debt, and London real estate sentiment.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">2026 FIFA World Cup</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.aljazeera.com/sports/2026/5/21/germany-make-neuer-first-choice-world-cup-keeper-to-cap-retirement-u-turn?traffic_source=rss" target="_blank">Germany make Neuer first-choice World Cup keeper to cap retirement U-turn</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.aljazeera.com/sports/2026/5/21/germany-make-neuer-first-choice-world-cup-keeper-to-cap-retirement-u-turn?traffic_source=rss" target="_blank">Al Jazeera</a>
+        </div>
+        <div class="article-summary">Neuer's shock return as Germany's number one ahead of the World Cup is a major sports story with implications for broadcasting and sponsorship markets.</div>
+      </div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.aljazeera.com/sports/2026/5/21/sadio-mane-kalidou-koulibaly-star-picks-in-senegals-world-cup-squad?traffic_source=rss" target="_blank">Sadio Mane, Kalidou Koulibaly star picks in Senegal's World Cup squad</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.aljazeera.com/sports/2026/5/21/sadio-mane-kalidou-koulibaly-star-picks-in-senegals-world-cup-squad?traffic_source=rss" target="_blank">Al Jazeera</a>
+        </div>
+        <div class="article-summary">Senegal's strong World Cup squad featuring global stars will drive significant commercial and media attention to African football markets.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">Global Risk & Insurance</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.economist.com/finance-and-economics/2026/05/21/the-insurers-on-the-hook-for-war-in-iran" target="_blank">The insurers on the hook for war in Iran</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.economist.com/finance-and-economics/2026/05/21/the-insurers-on-the-hook-for-war-in-iran" target="_blank">The Economist</a>
+        </div>
+        <div class="article-summary">War-risk insurance losses tied to Iran are materializing for some underwriters, raising systemic questions about how geopolitical conflict is priced and absorbed across global financial markets.</div>
+      </div>
+      
+    </div>
+    
+    <div class="tag-section">
+      <div class="tag-label">Urban Policy / Transportation</div>
+      
+      <div class="article-card">
+        <a class="article-title" href="https://www.nytimes.com/2026/05/21/world/europe/berlin-car-ban.html" target="_blank">In Berlin, Cars Are a Culture War Flashpoint</a>
+        <div class="article-meta">
+          2026-05-21 &mdash; <a href="https://www.nytimes.com/2026/05/21/world/europe/berlin-car-ban.html" target="_blank">New York Times</a>
+        </div>
+        <div class="article-summary">Berlin's car ban debate ahead of municipal elections illustrates how urban mobility policy is reshaping city planning, commercial real estate access, and political coalitions across Europe.</div>
+      </div>
+      
+    </div>
+    
+
+    <div class="worth-reading">
+      <div class="tag-label">Worth Reading</div>
+      <a href="https://www.economist.com/finance-and-economics/2026/05/21/the-insurers-on-the-hook-for-war-in-iran" target="_blank">The insurers on the hook for war in Iran</a>
+      <div class="meta">The Economist</div>
+      <p>War-risk losses in Iran are already hitting insurers hard — a direct signal of how Middle East conflict is transmitting into global financial markets, with knock-on effects for shipping, trade finance, and portfolio risk that every finance and real estate student should be tracking.</p>
+    </div>
+
+    <div class="rating">
+      <div class="tag-label">Rate This Brief</div>
+      <div class="rating-buttons">
+        <button onclick="selectRating(1, this)">1 — Useful</button>
+        <button onclick="selectRating(2, this)">2 — Missed Something</button>
+        <button onclick="selectRating(3, this)">3 — Not Relevant</button>
+      </div>
+      <textarea id="note" placeholder="What was missed or irrelevant? (optional)"></textarea>
+      <br/>
+      <button class="save-btn" onclick="saveRating()">Save Feedback</button>
+      <p class="saved-msg" id="saved-msg">Feedback saved.</p>
+    </div>
+
+    <div class="archive">
+      <div class="tag-label">Last 7 Days</div>
+      <ul id="archive-list"></ul>
+    </div>
+
+  </div>
+
+  <script>
+    let selectedRating = null;
+    const todayDate = "2026-05-21";
+
+    function selectRating(val, btn) {
+      selectedRating = val;
+      document.querySelectorAll('.rating-buttons button').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    function saveRating() {
+      if (!selectedRating) { alert("Please select a rating."); return; }
+      const note = document.getElementById('note').value;
+      fetch('/save-feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ date: todayDate, rating: selectedRating, note: note })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          document.getElementById('saved-msg').style.display = 'block';
+        }
+      })
+      .catch(() => {
+        const log = JSON.parse(localStorage.getItem('brief-log') || '[]');
+        const existing = log.findIndex(e => e.date === todayDate);
+        const entry = { date: todayDate, rating: selectedRating, note };
+        if (existing >= 0) log[existing] = entry;
+        else log.push(entry);
+        localStorage.setItem('brief-log', JSON.stringify(log));
+        document.getElementById('saved-msg').style.display = 'block';
+      });
+    }
+
+    function loadArchive() {
+      const log = JSON.parse(localStorage.getItem('brief-log') || '[]');
+      const list = document.getElementById('archive-list');
+      const labels = { 1: '✓ Useful', 2: '△ Missed something', 3: '✗ Not relevant' };
+      const last7 = log.slice(-7).reverse();
+      if (last7.length === 0) {
+        list.innerHTML = '<li style="color:#aaa; border:none;">No previous briefs rated yet.</li>';
+        return;
+      }
+      last7.forEach(entry => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="briefs/brief_${entry.date}.html">${entry.date}</a><span>${labels[entry.rating] || ''}</span>`;
+        list.appendChild(li);
+      });
+    }
+
+    loadArchive();
+  </script>
+
+</body>
+</html>
