@@ -514,6 +514,52 @@
     }
 
     .chat-send:hover { background: #333; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .sidebar {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        position: relative;
+        padding: 16px 0 0;
+        border-right: none;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .sidebar-logo {
+        padding: 0 16px 12px;
+      }
+      .sidebar-logo h1 { font-size: 15px; }
+      .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0;
+        gap: 0;
+      }
+      .nav-item {
+        padding: 10px 14px;
+        font-size: 12px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .nav-item.active {
+        border-left: none;
+        border-bottom: 3px solid #1a1a1a;
+        background: white;
+      }
+      .nav-item .icon { display: none; }
+      .sidebar-footer { display: none; }
+      .main {
+        margin-left: 0;
+        padding: 24px 16px;
+      }
+      .page-header h2 { font-size: 24px; }
+      .chat-window { width: 300px; }
+    }
   </style>
 </head>
 <body>
@@ -860,9 +906,16 @@
       if (!msg) return;
       input.value = '';
 
+      // Check for API key
+      let apiKey = localStorage.getItem('anthropic-api-key');
+      if (!apiKey) {
+        apiKey = prompt('Enter your Anthropic API key to use the chatbot:\n(Stored locally in your browser only)');
+        if (!apiKey) return;
+        localStorage.setItem('anthropic-api-key', apiKey);
+      }
+
       appendMsg('user', msg);
       appendMsg('thinking', 'Thinking...');
-
       chatHistory.push({ role: 'user', content: msg });
 
       const context = `You are an AI & entrepreneurship intelligence analyst. You have access to today's brief and the last 7 days of briefs. Use this as your primary context, but also draw on your own broader knowledge to answer questions, analyze trends, and provide deeper insight beyond what's in the brief.
@@ -878,7 +931,12 @@ Answer the user's question thoughtfully. Be concise but insightful.`;
       try {
         const response = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
           body: JSON.stringify({
             model: 'claude-sonnet-4-6',
             max_tokens: 1000,
@@ -887,15 +945,19 @@ Answer the user's question thoughtfully. Be concise but insightful.`;
           })
         });
 
+        if (!response.ok) {
+          localStorage.removeItem('anthropic-api-key');
+          throw new Error('API key invalid or request failed');
+        }
+
         const data = await response.json();
         const reply = data.content[0].text;
-
         removeThinking();
         appendMsg('assistant', reply);
         chatHistory.push({ role: 'assistant', content: reply });
       } catch (err) {
         removeThinking();
-        appendMsg('assistant', 'Something went wrong. Please try again.');
+        appendMsg('assistant', 'Something went wrong — your API key may be invalid. Please try again.');
       }
     }
 
