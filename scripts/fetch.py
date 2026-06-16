@@ -1,3 +1,10 @@
+from scripts.fetch_funding import fetch_funding, summarize_funding_signals
+from scripts.fetch_regulatory import fetch_regulatory, summarize_regulatory_signals
+from scripts.fetch_arxiv import fetch_arxiv, summarize_arxiv_signals
+from scripts.fetch_github import fetch_github, summarize_github_signals
+from scripts.fetch_patents import fetch_patents, summarize_patent_signals
+from scripts.fetch_stocks import fetch_stocks, summarize_stock_signals
+from scripts.fetch_jobs import fetch_jobs, summarize_job_signals
 import feedparser
 import requests
 import json
@@ -144,4 +151,25 @@ def fetch_all():
     articles += x_posts
     print("Fetching Polymarket signals...")
     polymarket = fetch_polymarket()
-    return articles, polymarket
+    print("Fetching job listings...")
+    jobs = fetch_jobs()
+    print(f"Fetched {len(jobs)} job signals.")
+    print("Fetching stock signals...")
+    stocks = fetch_stocks()
+    print(f"Fetched {len(stocks)} stock signals.")
+    print("Fetching patent signals...")
+    patents = fetch_patents()
+    print(f"Fetched {len(patents)} patent signals.")
+    print("Fetching GitHub signals...")
+    github = fetch_github()
+    print(f"Fetched {len(github)} GitHub signals.")
+    print("Fetching arXiv preprints...")
+    arxiv = fetch_arxiv()
+    print(f"Fetched {arxiv['total']} arXiv papers, {len(arxiv['velocity'])} velocity signals.")
+    print("Fetching VC funding signals...")
+    funding = fetch_funding()
+    print(f"Fetched {len(funding)} funding signals.")
+    print("Fetching regulatory signals...")
+    regulatory = fetch_regulatory()
+    print(f"Fetched {len(regulatory)} regulatory signals.")
+    return articles, polymarket, jobs, stocks, patents, github, arxiv, funding, regulatory

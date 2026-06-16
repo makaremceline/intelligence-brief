@@ -3,10 +3,17 @@ import os
 import json
 from datetime import date
 from dotenv import load_dotenv
+from scripts.fetch_jobs import summarize_job_signals
+from scripts.fetch_stocks import summarize_stock_signals
+from scripts.fetch_github import summarize_github_signals
+from scripts.fetch_arxiv import summarize_arxiv_signals
+from scripts.fetch_funding import summarize_funding_signals
+from scripts.fetch_regulatory import summarize_regulatory_signals
 
 load_dotenv()
 
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
 
 def load_feedback():
     try:
@@ -15,12 +22,13 @@ def load_feedback():
     except:
         return []
 
-def summarize(articles, polymarket):
+
+def summarize(articles, polymarket, jobs, stocks, github, arxiv, funding, regulatory):
     today = date.today().strftime("%Y-%m-%d")
 
     article_text = ""
-    for i, a in enumerate(articles):
-        article_text += f"[{i}] Source: {a['source']} | Title: {a['title']} | URL: {a['link']} | Summary: {a['summary']}\n\n"
+    for i, a in enumerate(articles[:12]):
+        article_text += f"[{i}] Source: {a['source']} | Title: {a['title']} | URL: {a['link']} | Summary: {a['summary'][:200]}\n\n"
 
     polymarket_text = ""
     if polymarket:
@@ -29,6 +37,13 @@ def summarize(articles, polymarket):
             polymarket_text += f"- {p['question']}: {p['odds']}% probability | Volume: ${p['volume']:,.0f} | {p['url']}\n"
     else:
         polymarket_text = "\nNo active Polymarket markets found for AI & entrepreneurship today.\n"
+
+    jobs_text = summarize_job_signals(jobs)
+    stocks_text = summarize_stock_signals(stocks)
+    github_text = summarize_github_signals(github)
+    arxiv_text = summarize_arxiv_signals(arxiv)
+    funding_text = summarize_funding_signals(funding)
+    regulatory_text = summarize_regulatory_signals(regulatory)
 
     feedback = load_feedback()
     feedback_text = ""
@@ -50,6 +65,12 @@ Today's date: {today}
 Here are today's articles and X posts:
 {article_text}
 {polymarket_text}
+{jobs_text}
+{stocks_text}
+{github_text}
+{arxiv_text}
+{funding_text}
+{regulatory_text}
 
 Produce THREE outputs:
 
@@ -62,7 +83,13 @@ Sections:
 - **The Big Picture**: 2-3 sentences on the single most important thing happening today
 - **Key Developments**: 4-6 meaty paragraphs, each covering a major theme. Cite sources inline like (TechCrunch), (a16z), (@karpathy). Add your own analysis and historical context. Make each paragraph substantial — at least 5-6 sentences.
 - **Signals to Watch**: 3 forward-looking observations based on today's news and Polymarket
-- **Polymarket Intelligence**: A full paragraph interpreting the probability swings — what shifted, why it likely happened, what it signals for AI & entrepreneurship
+- **Polymarket Intelligence**: A full paragraph interpreting the probability swings
+- **Job Market Signals**: What are AI companies hiring for right now and what does it signal
+- **GitHub Intelligence**: What are AI labs building and committing to right now
+- **arXiv Intelligence**: What are the most important AI preprints today and what does the velocity signal
+- **VC Funding Signals**: What categories of AI startups are getting funded and what does it signal
+- **Regulatory Signals**: What is the FTC or FCC doing this week on AI and tech policy
+- **Contradiction Tracker**: Flag any cases where two credible sources say opposite things. If none, say so.
 
 Tone: Smart but approachable. Like a brilliant analyst over coffee. Full paragraphs, no bullet lists.
 
@@ -84,9 +111,9 @@ Structure:
 1. Cold open — one provocative hook line from Alex
 2. Main story 1 — deep dive, back and forth, at least 6-8 exchanges
 3. Main story 2 — different topic, equally deep, 6-8 exchanges
-3. Polymarket segment — Jordan asks what the market is saying, Alex interprets
-4. Signals segment — what to watch this week
-5. Sign off — natural, not stiff
+4. Polymarket segment — Jordan asks what the market is saying, Alex interprets
+5. Signals segment — what to watch this week
+6. Sign off — natural, not stiff
 
 Rules:
 - Natural conversation — interruptions, follow-up questions, "wait, so what you're saying is..."
@@ -105,7 +132,13 @@ Return ONLY this JSON, no preamble:
       {{"theme": "Theme title", "content": "Substantial paragraph with inline citations..."}}
     ],
     "signals_to_watch": ["Signal 1 full sentence...", "Signal 2...", "Signal 3..."],
-    "polymarket_intelligence": "Full paragraph..."
+    "polymarket_intelligence": "Full paragraph...",
+    "job_market_signals": "Full paragraph on hiring patterns...",
+    "github_intelligence": "Full paragraph on GitHub activity...",
+    "arxiv_intelligence": "Full paragraph on arXiv activity...",
+    "funding_intelligence": "Full paragraph on VC funding activity...",
+    "regulatory_intelligence": "Full paragraph on regulatory activity...",
+    "contradiction_tracker": "Full paragraph identifying contradictions, or noting none found today."
   }},
   "tags": [
     {{
