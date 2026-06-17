@@ -20,9 +20,11 @@ def render(brief_data):
             except:
                 continue
 
-    # Check if audio file exists
     audio_path = brief_data.get("audio_path", None)
     audio_filename = os.path.basename(audio_path) if audio_path else None
+
+    infographic_path = brief_data.get("infographic_path", None)
+    infographic_filename = os.path.basename(infographic_path) if infographic_path else None
 
     output = template.render(
         date=today,
@@ -33,6 +35,7 @@ def render(brief_data):
         past_briefs_json=json.dumps(past_briefs),
         today_brief_json=json.dumps(brief_data),
         audio_filename=audio_filename,
+        infographic_filename=infographic_filename,
     )
 
     filename = f"briefs/brief_{today}.html"
