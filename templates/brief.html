@@ -4,544 +4,230 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Foreword Intelligence — {{ date }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --navy: #0C1B33;
-      --gold: #C8A96E;
-      --bg: #F9F8F6;
-      --surface: #FFFFFF;
-      --border: #E8E4DE;
-      --text: #1a1a1a;
-      --muted: #888;
-      --sidebar-w: 224px;
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --navy:#0C1B33;
+      --gold:#C8A96E;
+      --bg:#F8F6F2;
+      --surface:#FFFFFF;
+      --border:#EAE6DF;
+      --text:#1A1A1A;
+      --muted:#9A9590;
+      --sidebar-w:220px;
+      --accent:#1B6EF5;
     }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      min-height: 100vh;
-    }
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;}
 
     /* ── SIDEBAR ── */
-    .sidebar {
-      width: var(--sidebar-w);
-      min-width: var(--sidebar-w);
-      background: var(--navy);
-      position: fixed;
-      top: 0; left: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      z-index: 100;
-    }
-
-    .sidebar-brand {
-      padding: 28px 20px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .sidebar-brand h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.2;
-      letter-spacing: -0.2px;
-    }
-
-    .sidebar-brand .tagline {
-      font-size: 10px;
-      color: var(--gold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-top: 5px;
-    }
-
-    .sidebar-nav {
-      flex: 1;
-      padding: 12px 0;
-      overflow-y: auto;
-    }
-
-    .nav-section {
-      padding: 8px 20px 4px;
-      font-size: 9px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      font-weight: 600;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 20px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: all 0.15s;
-      user-select: none;
-    }
-
-    .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
-    .nav-item.active { color: #fff; border-left-color: var(--gold); background: rgba(255,255,255,0.07); }
-    .nav-item .icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
-
-    .sidebar-date {
-      padding: 14px 20px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      font-size: 11px;
-      color: rgba(255,255,255,0.3);
-    }
+    .sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--navy);position:fixed;top:0;left:0;height:100vh;display:flex;flex-direction:column;z-index:100;}
+    .sidebar-brand{padding:28px 22px 22px;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .sidebar-brand h1{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;color:#fff;line-height:1.3;letter-spacing:0.01em;}
+    .sidebar-brand .tagline{font-size:9px;color:var(--gold);letter-spacing:0.18em;text-transform:uppercase;margin-top:6px;font-weight:600;}
+    .sidebar-nav{flex:1;padding:10px 0;overflow-y:auto;}
+    .nav-section{padding:16px 22px 4px;font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-weight:600;}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:9px 22px;font-size:12.5px;color:rgba(255,255,255,0.55);cursor:pointer;border-left:2px solid transparent;transition:all 0.15s;user-select:none;}
+    .nav-item:hover{color:#fff;background:rgba(255,255,255,0.04);}
+    .nav-item.active{color:#fff;border-left-color:var(--gold);background:rgba(255,255,255,0.06);}
+    .nav-item .icon{font-size:13px;width:17px;text-align:center;flex-shrink:0;}
+    .sidebar-date{padding:14px 22px;border-top:1px solid rgba(255,255,255,0.07);font-size:10.5px;color:rgba(255,255,255,0.25);}
 
     /* ── MAIN ── */
-    .main {
-      margin-left: var(--sidebar-w);
-      flex: 1;
-      min-height: 100vh;
-    }
+    .main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;}
+    .section{display:none;padding:48px 56px;max-width:840px;}
+    .section.active{display:block;}
 
-    .section { display: none; padding: 40px 52px; max-width: 820px; }
-    .section.active { display: block; }
+    .page-header{margin-bottom:40px;padding-bottom:22px;border-bottom:1px solid var(--border);}
+    .page-header .eyebrow{font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;}
+    .page-header h2{font-family:'DM Serif Display',serif;font-size:30px;font-weight:400;color:var(--navy);line-height:1.15;}
+    .page-header .meta{font-size:11.5px;color:var(--muted);margin-top:7px;}
 
-    /* Page header */
-    .page-header {
-      margin-bottom: 36px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
+    /* ── REPORT ── */
+    .block-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
 
-    .page-header .eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
+    .big-picture{font-family:'DM Serif Display',serif;font-size:20px;line-height:1.65;color:var(--navy);margin-bottom:40px;font-style:italic;}
 
-    .page-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.2;
-    }
+    /* Development cards — punchy, minimal */
+    .developments{display:flex;flex-direction:column;gap:0;margin-bottom:40px;}
+    .dev-item{padding:22px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:140px 1fr;gap:24px;align-items:start;}
+    .dev-item:first-child{padding-top:0;}
+    .dev-theme{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);padding-top:3px;line-height:1.4;}
+    .dev-body{}
+    .dev-headline{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px;line-height:1.4;}
+    .dev-summary{font-size:13.5px;line-height:1.7;color:#444;}
+    .dev-source{display:inline-block;margin-top:8px;font-size:11px;color:var(--accent);text-decoration:none;font-weight:500;}
+    .dev-source:hover{text-decoration:underline;}
 
-    .page-header .meta {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
+    /* Signal watch pills */
+    .signals-list{display:flex;flex-direction:column;gap:10px;margin-bottom:40px;}
+    .signal-pill{padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-left:2px solid var(--navy);font-size:13.5px;line-height:1.6;color:#333;}
 
-    /* ── REPORT SECTION ── */
-    .report-block {
-      margin-bottom: 36px;
-    }
+    /* Intelligence cards grid */
+    .intel-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:40px;}
+    .intel-card{background:var(--surface);border:1px solid var(--border);padding:18px 20px;}
+    .intel-card .ic-label{font-size:8.5px;text-transform:uppercase;letter-spacing:0.18em;color:var(--gold);font-weight:700;margin-bottom:8px;}
+    .intel-card .ic-text{font-size:13px;line-height:1.65;color:#444;}
 
-    .block-label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 600;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .big-picture {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      line-height: 1.75;
-      color: var(--navy);
-    }
-
-    .development {
-      margin-bottom: 24px;
-      padding: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-    }
-
-    .development-theme {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-
-    .development-content {
-      font-size: 15px;
-      line-height: 1.8;
-      color: #333;
-    }
-
-    /* Bold inline key terms */
-    .development-content strong,
-    .big-picture strong {
-      font-weight: 700;
-      color: var(--navy);
-    }
-
-    .signal-item {
-      padding: 12px 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--navy);
-      margin-bottom: 10px;
-      font-size: 14px;
-      line-height: 1.7;
-      color: #333;
-    }
-
-    .polymarket-box {
-      padding: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      font-size: 15px;
-      line-height: 1.8;
-      color: #333;
-    }
-
-    .worth-reading-box {
-      background: var(--navy);
-      padding: 24px 28px;
-      margin-top: 8px;
-    }
-
-    .worth-reading-box .block-label { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.1); }
-    .worth-reading-box a {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      margin: 8px 0 4px;
-      line-height: 1.4;
-    }
-    .worth-reading-box a:hover { text-decoration: underline; }
-    .worth-reading-box .wr-source { font-size: 11px; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .worth-reading-box p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.6; }
-
-    /* Intelligence signal cards */
-    .signal-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
-    .signal-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 16px 18px;
-    }
-    .signal-card .sc-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
-    .signal-card p { font-size: 13px; line-height: 1.6; color: #444; }
+    /* Worth reading */
+    .worth-reading{background:var(--navy);padding:28px 32px;margin-bottom:40px;}
+    .worth-reading .block-label{color:rgba(255,255,255,0.3);border-color:rgba(255,255,255,0.08);}
+    .worth-reading a{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;text-decoration:none;display:block;margin:10px 0 5px;line-height:1.35;}
+    .worth-reading a:hover{text-decoration:underline;}
+    .worth-reading .wr-src{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+    .worth-reading p{font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.65;}
 
     /* ── ARTICLES ── */
-    .tag-group { margin-bottom: 32px; }
-    .tag-name {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
+    .tag-group{margin-bottom:36px;}
+    .tag-name{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+    .article-item{padding:14px 0;border-bottom:1px solid #F0EDE8;}
+    .article-item:last-child{border-bottom:none;}
+    .article-title{font-size:14.5px;font-weight:600;color:var(--navy);text-decoration:none;display:block;margin-bottom:3px;line-height:1.4;}
+    .article-title:hover{text-decoration:underline;}
+    .article-meta{font-size:10.5px;color:#CCC;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:5px;}
+    .article-summary{font-size:13px;color:#555;line-height:1.6;}
 
-    .article-card {
-      padding: 14px 0;
-      border-bottom: 1px solid #f0ece5;
-    }
-    .article-card:last-child { border-bottom: none; }
+    /* ── STUDIO — NotebookLM style ── */
+    .studio-intro{font-size:13.5px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:560px;}
 
-    .article-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--navy);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 4px;
-      line-height: 1.4;
-    }
-    .article-title:hover { text-decoration: underline; }
+    .studio-panels{display:flex;flex-direction:column;gap:0;}
 
-    .article-meta {
-      font-size: 11px;
-      color: #bbb;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 5px;
-    }
-    .article-meta a { color: #bbb; text-decoration: none; }
-    .article-meta a:hover { color: #555; }
+    /* Each panel is a full-width clickable row */
+    .studio-panel{border:1px solid var(--border);background:var(--surface);margin-bottom:12px;cursor:pointer;transition:border-color 0.2s,box-shadow 0.2s;}
+    .studio-panel:hover{border-color:#CCC;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+    .studio-panel.open{border-color:var(--navy);}
 
-    .article-summary { font-size: 14px; color: #555; line-height: 1.6; }
+    .studio-panel-header{display:flex;align-items:center;gap:16px;padding:20px 24px;}
+    .sp-icon{width:40px;height:40px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+    .sp-info{flex:1;}
+    .sp-name{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px;}
+    .sp-desc{font-size:12px;color:var(--muted);line-height:1.4;}
+    .sp-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+    .sp-status{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;}
+    .sp-status.ready{background:#E8F5E9;color:#2E7D32;}
+    .sp-status.generating{background:#FFF8E1;color:#F57F17;}
+    .sp-status.none{background:var(--bg);color:var(--muted);}
+    .sp-chevron{font-size:11px;color:var(--muted);transition:transform 0.2s;}
+    .studio-panel.open .sp-chevron{transform:rotate(180deg);}
 
-    /* ── STUDIO ── */
-    .studio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .studio-panel-body{display:none;padding:0 24px 24px;border-top:1px solid var(--border);}
+    .studio-panel.open .studio-panel-body{display:block;}
+    .studio-panel-body .generate-btn{margin-top:16px;padding:10px 24px;background:var(--navy);color:#fff;border:none;font-size:12.5px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;letter-spacing:0.04em;transition:opacity 0.15s;}
+    .studio-panel-body .generate-btn:hover{opacity:0.85;}
+    .studio-panel-body .generate-btn:disabled{opacity:0.4;cursor:not-allowed;}
 
-    .studio-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    /* Audio player */
+    .audio-player-wrap{margin-top:16px;background:var(--bg);padding:16px 20px;border:1px solid var(--border);}
+    .audio-ep-title{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:10px;}
+    .audio-player-wrap audio{width:100%;height:36px;}
 
-    .studio-card-icon { font-size: 28px; }
-    .studio-card-name { font-size: 13px; font-weight: 700; color: var(--navy); }
-    .studio-card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    /* Infographic */
+    .infographic-wrap{margin-top:16px;}
+    .infographic-wrap img{width:100%;border:1px solid var(--border);}
+    .infographic-wrap a{display:block;margin-top:8px;font-size:11.5px;color:var(--accent);text-decoration:none;font-weight:500;}
+    .infographic-wrap a:hover{text-decoration:underline;}
 
-    .studio-card-status {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 10px;
-      border-radius: 2px;
-      display: inline-block;
-    }
-    .status-ready { background: #e8f5e9; color: #2e7d32; }
-    .status-none { background: #f5f5f5; color: #999; }
+    /* Script viewer */
+    .script-wrap{margin-top:16px;max-height:400px;overflow-y:auto;}
+    .script-line{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+    .script-speaker{font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;min-width:48px;text-align:center;flex-shrink:0;margin-top:2px;}
+    .script-speaker.alex{background:var(--navy);color:#fff;}
+    .script-speaker.jordan{background:#F0EDE8;color:#333;}
+    .script-text{font-size:13px;line-height:1.7;color:#333;}
 
-    .studio-btn {
-      padding: 9px 16px;
-      font-size: 12px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 0.15s;
-    }
-    .studio-btn-primary { background: var(--navy); color: #fff; }
-    .studio-btn-primary:hover { opacity: 0.85; }
-    .studio-btn-secondary { background: var(--border); color: var(--navy); }
+    /* Quiz output */
+    .quiz-output{margin-top:16px;}
+    .quiz-q{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--gold);padding:18px 20px;margin-bottom:12px;}
+    .quiz-q-num{font-size:9.5px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
+    .quiz-q-text{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:10px;line-height:1.4;}
+    .quiz-option{font-size:13px;color:#444;padding:5px 0;border-bottom:1px solid #F5F3EF;}
+    .quiz-answer{margin-top:10px;padding:10px 14px;background:#E8F5E9;font-size:12.5px;color:#2E7D32;}
 
-    .studio-audio-player {
-      margin-top: 4px;
-    }
-    .studio-audio-player audio { width: 100%; height: 36px; }
+    /* Slide outline */
+    .slide-item{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+    .slide-num{font-family:'DM Serif Display',serif;font-size:24px;color:#DDD;min-width:28px;flex-shrink:0;}
+    .slide-content .slide-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+    .slide-bullet{font-size:12.5px;color:#444;padding:3px 0 3px 12px;border-left:2px solid var(--gold);margin-bottom:3px;}
+    .slide-note{margin-top:8px;font-size:11.5px;color:var(--muted);font-style:italic;line-height:1.5;}
 
-    .studio-infographic img {
-      width: 100%;
-      border: 1px solid var(--border);
-      margin-top: 4px;
-    }
+    /* Mind map */
+    #mindmap-container{margin-top:16px;width:100%;height:480px;background:#F8F6F2;border:1px solid var(--border);position:relative;overflow:hidden;cursor:grab;}
+    #mindmap-svg{width:100%;height:100%;}
 
-    /* ── STUDENT Q's ── */
-    .student-q {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-
-    .student-q .q-text {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    .student-q .q-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .student-q .a-text {
-      font-size: 14px;
-      color: #444;
-      line-height: 1.7;
-    }
+    /* ── STUDENT QUESTIONS ── */
+    .student-q{padding:24px 0;border-bottom:1px solid var(--border);}
+    .student-q:last-child{border-bottom:none;}
+    .q-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--gold);margin-bottom:8px;}
+    .q-text{font-family:'DM Serif Display',serif;font-size:17px;color:var(--navy);line-height:1.5;margin-bottom:16px;font-style:italic;}
+    .a-text{font-size:13.5px;line-height:1.75;color:#444;}
 
     /* ── UPLOAD ── */
-    .upload-zone {
-      border: 2px dashed var(--border);
-      background: var(--surface);
-      padding: 48px 32px;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.15s;
-      margin-bottom: 20px;
-    }
-    .upload-zone:hover, .upload-zone.drag-over {
-      border-color: var(--gold);
-    }
-    .upload-zone .upload-icon { font-size: 32px; margin-bottom: 12px; }
-    .upload-zone h3 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
-    .upload-zone p { font-size: 13px; color: var(--muted); }
-    #file-input { display: none; }
-
-    .uploaded-files { margin-top: 16px; }
-    .uploaded-file {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 14px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      margin-bottom: 8px;
-      font-size: 13px;
-    }
-    .uploaded-file .fname { font-weight: 500; color: var(--navy); }
-    .uploaded-file .fsize { color: var(--muted); font-size: 11px; }
-    .uploaded-file button { background: none; border: none; color: #ccc; cursor: pointer; font-size: 16px; }
-    .uploaded-file button:hover { color: #888; }
-
-    .upload-info {
-      background: #f0f4ff;
-      border: 1px solid #d0daff;
-      padding: 14px 18px;
-      font-size: 13px;
-      color: #3a5bcc;
-      line-height: 1.6;
-      margin-top: 16px;
-    }
+    .upload-zone{border:1.5px dashed var(--border);padding:40px;text-align:center;cursor:pointer;background:var(--surface);transition:border-color 0.15s;}
+    .upload-zone:hover,.upload-zone.drag-over{border-color:var(--navy);}
+    .upload-zone .upload-icon{font-size:28px;margin-bottom:12px;}
+    .upload-zone h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+    .upload-zone p{font-size:13px;color:var(--muted);}
+    .upload-zone input{display:none;}
+    .uploaded-file{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+    .fname{font-size:13.5px;font-weight:500;color:var(--navy);}
+    .fsize{font-size:11px;color:var(--muted);margin-top:2px;}
+    .uploaded-file button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:0 4px;}
+    .upload-info{margin-top:24px;font-size:12.5px;color:var(--muted);line-height:1.7;padding:16px 20px;background:var(--surface);border:1px solid var(--border);}
 
     /* ── FEEDBACK ── */
-    .rating-btns { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-    .rating-btn {
-      padding: 10px 20px;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      cursor: pointer;
-      transition: all 0.15s;
-      color: var(--text);
-    }
-    .rating-btn:hover, .rating-btn.selected {
-      background: var(--navy);
-      color: #fff;
-      border-color: var(--navy);
-    }
-    .note-area {
-      width: 100%;
-      padding: 12px;
-      font-size: 14px;
-      font-family: 'Inter', sans-serif;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      resize: vertical;
-      min-height: 80px;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-    .save-btn {
-      padding: 10px 28px;
-      font-size: 13px;
-      font-family: 'Inter', sans-serif;
-      background: var(--navy);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-    .save-btn:hover { opacity: 0.85; }
-    .saved-msg { font-size: 13px; color: var(--muted); margin-top: 10px; display: none; }
+    .rating-btns{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+    .rating-btn{padding:10px 18px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;color:#444;transition:all 0.15s;}
+    .rating-btn:hover,.rating-btn.selected{border-color:var(--navy);background:var(--navy);color:#fff;}
+    .note-area{width:100%;min-height:100px;padding:14px 16px;font-size:13.5px;font-family:'DM Sans',sans-serif;border:1.5px solid var(--border);outline:none;resize:vertical;background:var(--surface);color:var(--text);}
+    .note-area:focus{border-color:var(--navy);}
+    .save-btn{margin-top:14px;padding:11px 28px;background:var(--navy);color:#fff;border:none;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;}
+    .saved-msg{display:none;margin-top:12px;font-size:13px;color:#2E7D32;}
 
     /* ── ARCHIVE ── */
-    .archive-list { list-style: none; }
-    .archive-list li {
-      font-size: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0ece5;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .archive-list li a { color: var(--navy); text-decoration: none; font-weight: 500; }
-    .archive-list li a:hover { text-decoration: underline; }
-    .archive-list li span { font-size: 12px; color: #bbb; }
+    .archive-list{list-style:none;}
+    .archive-list li{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border);font-size:13.5px;}
+    .archive-list a{color:var(--navy);text-decoration:none;font-weight:500;}
+    .archive-list a:hover{text-decoration:underline;}
+    .archive-list span{color:var(--muted);font-size:12px;}
 
     /* ── CHATBOT ── */
-    .chat-bubble { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
-    .chat-toggle {
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      background: var(--navy);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 20px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.2s;
-    }
-    .chat-toggle:hover { transform: scale(1.05); }
-    .chat-window {
-      position: absolute;
-      bottom: 64px; right: 0;
-      width: 360px; height: 480px;
-      background: #fff;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-      display: none; flex-direction: column;
-    }
-    .chat-window.open { display: flex; }
-    .chat-header {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
-      background: var(--navy);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .chat-header h4 { font-size: 13px; font-weight: 600; color: #fff; }
-    .chat-header p { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-    .chat-close { background: none; border: none; font-size: 18px; cursor: pointer; color: rgba(255,255,255,0.5); }
-    .chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-    .chat-msg { max-width: 85%; padding: 9px 13px; font-size: 13px; line-height: 1.5; }
-    .chat-msg.user { background: var(--navy); color: #fff; align-self: flex-end; }
-    .chat-msg.assistant { background: #f4f4f4; color: var(--text); align-self: flex-start; }
-    .chat-msg.thinking { background: #f4f4f4; color: #999; align-self: flex-start; font-style: italic; }
-    .chat-input-row { padding: 10px 14px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-    .chat-input { flex: 1; padding: 8px 11px; font-size: 13px; font-family: 'Inter', sans-serif; border: 1px solid var(--border); outline: none; }
-    .chat-input:focus { border-color: var(--navy); }
-    .chat-send { padding: 8px 14px; background: var(--navy); color: #fff; border: none; cursor: pointer; font-size: 13px; font-family: 'Inter', sans-serif; }
+    .chat-bubble{position:fixed;bottom:28px;right:28px;z-index:999;}
+    .chat-toggle{width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+    .chat-window{display:none;position:absolute;bottom:60px;right:0;width:340px;background:#fff;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,0.12);flex-direction:column;}
+    .chat-window.open{display:flex;}
+    .chat-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
+    .chat-header h4{font-size:14px;font-weight:600;color:var(--navy);}
+    .chat-header p{font-size:11px;color:var(--muted);}
+    .chat-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--muted);padding:0;}
+    .chat-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:280px;}
+    .chat-msg{padding:10px 13px;font-size:13px;line-height:1.6;max-width:88%;}
+    .chat-msg.user{background:var(--navy);color:#fff;align-self:flex-end;}
+    .chat-msg.assistant{background:var(--bg);color:var(--text);align-self:flex-start;}
+    .chat-msg.thinking{background:var(--bg);color:var(--muted);align-self:flex-start;font-style:italic;}
+    .chat-input-row{display:flex;border-top:1px solid var(--border);}
+    .chat-input{flex:1;padding:12px 14px;border:none;outline:none;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;}
+    .chat-send{padding:0 16px;background:var(--navy);color:#fff;border:none;cursor:pointer;font-size:16px;}
 
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      .sidebar {
-        width: 100%; min-width: 100%;
-        height: auto; position: relative;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-      }
-      .sidebar-nav { display: flex; flex-direction: row; overflow-x: auto; padding: 0; }
-      .nav-section { display: none; }
-      .nav-item {
-        padding: 10px 14px;
-        border-left: none;
-        border-bottom: 3px solid transparent;
-        white-space: nowrap;
-        flex-shrink: 0;
-        font-size: 12px;
-      }
-      .nav-item.active { border-left: none; border-bottom-color: var(--gold); background: rgba(255,255,255,0.07); }
-      .nav-item .icon { display: none; }
-      .sidebar-date { display: none; }
-      .main { margin-left: 0; }
-      .section { padding: 24px 16px; }
-      .signal-cards, .studio-grid { grid-template-columns: 1fr; }
-      .chat-window { width: 300px; }
+    @media(max-width:768px){
+      .sidebar{display:none;}
+      .main{margin-left:0;}
+      .section{padding:24px 20px;}
+      .dev-item{grid-template-columns:1fr;}
+      .intel-grid{grid-template-columns:1fr;}
     }
+
+    #mindmap-container{margin-top:16px;width:100%;background:#F8F6F2;border:1px solid var(--border);padding:24px 20px;overflow-x:auto;min-height:200px;}
+    .mm-wrap{display:flex;align-items:flex-start;gap:0;}
+    .mm-date{background:#0C1B33;color:#fff;font-size:11px;font-weight:700;padding:8px 14px;border-radius:4px;white-space:nowrap;align-self:center;}
+    .mm-connector{width:32px;height:1.5px;background:#DADADA;align-self:center;flex-shrink:0;}
+    .mm-branches{display:flex;flex-direction:column;gap:10px;}
+    .mm-branch{display:flex;align-items:center;gap:0;}
+    .mm-theme{background:#1B6EF5;color:#fff;font-size:9.5px;font-weight:700;padding:6px 12px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+    .mm-theme.mm-signals{background:#C8A96E;color:#0C1B33;}
+    .mm-sub-connector{width:16px;height:1.5px;background:#DADADA;flex-shrink:0;}
+    .mm-entities{display:flex;flex-direction:column;gap:5px;}
+    .mm-entity{background:#E8F0FE;color:#1B6EF5;font-size:9px;font-weight:500;padding:4px 10px;border-radius:3px;white-space:nowrap;border:1px solid #C5D5F5;}
+    .mm-entity.mm-signal{background:#FFF8E1;color:#C8A96E;border-color:#FFE082;}
   </style>
 </head>
 <body>
@@ -549,34 +235,21 @@
 <!-- SIDEBAR -->
 <div class="sidebar">
   <div class="sidebar-brand">
-    <h1>Foreword<br>Intelligence</h1>
-    <div class="tagline">AI & Entrepreneurship</div>
+    <h1>Foreword<br/>Intelligence</h1>
+    <div class="tagline">Daily Brief</div>
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-section">Brief</div>
-    <div class="nav-item active" onclick="showSection('report',this)">
-      <span class="icon">📊</span> Analyst Report
-    </div>
-    <div class="nav-item" onclick="showSection('articles',this)">
-      <span class="icon">📰</span> Articles
-    </div>
-    <div class="nav-section">Outputs</div>
-    <div class="nav-item" onclick="showSection('studio',this)">
-      <span class="icon">🎙️</span> Studio
-    </div>
-    <div class="nav-section">Tools</div>
-    <div class="nav-item" onclick="showSection('questions',this)">
-      <span class="icon">🎓</span> Student Questions
-    </div>
-    <div class="nav-item" onclick="showSection('upload',this)">
-      <span class="icon">📎</span> My Sources
-    </div>
-    <div class="nav-item" onclick="showSection('feedback',this)">
-      <span class="icon">💬</span> Feedback
-    </div>
-    <div class="nav-item" onclick="showSection('archive',this)">
-      <span class="icon">🗂️</span> Archive
-    </div>
+    <div class="nav-section">Today</div>
+    <div class="nav-item active" onclick="showSection('report',this)"><span class="icon">📋</span> Analyst Report</div>
+    <div class="nav-item" onclick="showSection('articles',this)"><span class="icon">📰</span> Articles</div>
+    <div class="nav-section">Studio</div>
+    <div class="nav-item" onclick="showSection('studio',this)"><span class="icon">🎙️</span> Studio</div>
+    <div class="nav-section">Teaching</div>
+    <div class="nav-item" onclick="showSection('questions',this)"><span class="icon">💬</span> Student Questions</div>
+    <div class="nav-section">Personal</div>
+    <div class="nav-item" onclick="showSection('upload',this)"><span class="icon">📎</span> My Sources</div>
+    <div class="nav-item" onclick="showSection('feedback',this)"><span class="icon">⭐</span> Rate This Brief</div>
+    <div class="nav-item" onclick="showSection('archive',this)"><span class="icon">🗂️</span> Archive</div>
   </nav>
   <div class="sidebar-date">{{ date }}</div>
 </div>
@@ -584,97 +257,133 @@
 <!-- MAIN -->
 <div class="main">
 
-  <!-- REPORT -->
+  <!-- ANALYST REPORT -->
   <div class="section active" id="section-report">
     <div class="page-header">
-      <div class="eyebrow">Daily Intelligence Report</div>
-      <h2>AI & Entrepreneurship</h2>
-      <div class="meta">{{ date }} · Synthesized by Foreword Intelligence</div>
+      <div class="eyebrow">Foreword Intelligence · {{ date }}</div>
+      <h2>Daily Intelligence Brief</h2>
+      <div class="meta">AI & Entrepreneurship · Senior Analyst Report</div>
     </div>
 
+    <!-- Big Picture -->
     <div class="report-block">
       <div class="block-label">The Big Picture</div>
-      <p class="big-picture">{{ report.big_picture }}</p>
+      <div class="big-picture">{{ report.big_picture | default("") }}</div>
     </div>
 
+    <!-- Key Developments — punchy card layout -->
     <div class="report-block">
       <div class="block-label">Key Developments</div>
-      {% for dev in report.key_developments %}
-      <div class="development">
-        <div class="development-theme">{{ dev.theme }}</div>
-        <div class="development-content">{{ dev.content }}</div>
+      <div class="developments">
+        {% for dev in report.key_developments %}
+        <div class="dev-item">
+          <div class="dev-theme">{{ dev.theme }}</div>
+          <div class="dev-body">
+            {% set sentences = dev.content.split('. ') %}
+            <div class="dev-headline">{{ sentences[0] }}{% if sentences|length > 1 %}.{% endif %}</div>
+            {% if sentences|length > 1 %}
+            <div class="dev-summary">{{ sentences[1:] | join('. ') }}</div>
+            {% endif %}
+            {% set content_lower = dev.content | lower %}
+            {% if '(techcrunch)' in content_lower %}<a class="dev-source" href="https://techcrunch.com" target="_blank" rel="noopener">↗ TechCrunch</a>
+            {% elif '(venturebeat)' in content_lower %}<a class="dev-source" href="https://venturebeat.com" target="_blank" rel="noopener">↗ VentureBeat</a>
+            {% elif '(mit tech review)' in content_lower %}<a class="dev-source" href="https://technologyreview.com" target="_blank" rel="noopener">↗ MIT Tech Review</a>
+            {% elif '(a16z)' in content_lower %}<a class="dev-source" href="https://a16z.com" target="_blank" rel="noopener">↗ a16z</a>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
 
+    <!-- Signals to Watch -->
+    {% if report.signals_to_watch %}
     <div class="report-block">
       <div class="block-label">Signals to Watch</div>
-      {% for signal in report.signals_to_watch %}
-      <div class="signal-item">{{ signal }}</div>
-      {% endfor %}
-    </div>
-
-    <div class="report-block">
-      <div class="block-label">Polymarket Intelligence</div>
-      <div class="polymarket-box">{{ report.polymarket_intelligence }}</div>
-    </div>
-
-    {% if report.job_market_signals %}
-    <div class="report-block">
-      <div class="block-label">Signal Intelligence</div>
-      <div class="signal-cards">
-        <div class="signal-card">
-          <div class="sc-label">💼 Job Market</div>
-          <p>{{ report.job_market_signals }}</p>
-        </div>
-        <div class="signal-card">
-          <div class="sc-label">⚗️ GitHub Activity</div>
-          <p>{{ report.github_intelligence }}</p>
-        </div>
-        <div class="signal-card">
-          <div class="sc-label">📄 arXiv Preprints</div>
-          <p>{{ report.arxiv_intelligence }}</p>
-        </div>
-        <div class="signal-card">
-          <div class="sc-label">💰 VC Funding</div>
-          <p>{{ report.funding_intelligence }}</p>
-        </div>
+      <div class="signals-list">
+        {% for signal in report.signals_to_watch %}
+        <div class="signal-pill">{{ signal }}</div>
+        {% endfor %}
       </div>
     </div>
     {% endif %}
 
-    {% if report.contradiction_tracker %}
+    <!-- Intelligence Grid -->
     <div class="report-block">
-      <div class="block-label">Contradiction Tracker</div>
-      <div class="polymarket-box">{{ report.contradiction_tracker }}</div>
+      <div class="block-label">Intelligence</div>
+      <div class="intel-grid">
+        {% if report.polymarket_intelligence %}
+        <div class="intel-card">
+          <div class="ic-label">📊 Prediction Markets</div>
+          <div class="ic-text">{{ report.polymarket_intelligence }}</div>
+        </div>
+        {% endif %}
+        {% if report.job_market_signals %}
+        <div class="intel-card">
+          <div class="ic-label">💼 Job Market</div>
+          <div class="ic-text">{{ report.job_market_signals }}</div>
+        </div>
+        {% endif %}
+        {% if report.funding_intelligence %}
+        <div class="intel-card">
+          <div class="ic-label">💰 VC Funding</div>
+          <div class="ic-text">{{ report.funding_intelligence }}</div>
+        </div>
+        {% endif %}
+        {% if report.github_intelligence %}
+        <div class="intel-card">
+          <div class="ic-label">⚙️ GitHub Activity</div>
+          <div class="ic-text">{{ report.github_intelligence }}</div>
+        </div>
+        {% endif %}
+        {% if report.arxiv_intelligence %}
+        <div class="intel-card">
+          <div class="ic-label">📄 Research (arXiv)</div>
+          <div class="ic-text">{{ report.arxiv_intelligence }}</div>
+        </div>
+        {% endif %}
+        {% if report.regulatory_intelligence %}
+        <div class="intel-card">
+          <div class="ic-label">⚖️ Regulatory</div>
+          <div class="ic-text">{{ report.regulatory_intelligence }}</div>
+        </div>
+        {% endif %}
+        {% if report.contradiction_tracker %}
+        <div class="intel-card" style="border-left:2px solid #E53935;">
+          <div class="ic-label" style="color:#E53935;">⚡ Contradictions</div>
+          <div class="ic-text">{{ report.contradiction_tracker }}</div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Worth Reading -->
+    {% if worth_reading %}
+    <div class="worth-reading">
+      <div class="block-label">Worth Reading Today</div>
+      <a href="{{ worth_reading.url }}" target="_blank" rel="noopener">{{ worth_reading.title }}</a>
+      <div class="wr-src">{{ worth_reading.source }}</div>
+      <p>{{ worth_reading.reason }}</p>
     </div>
     {% endif %}
 
-    <div class="worth-reading-box">
-      <div class="block-label">Worth Reading</div>
-      <a href="{{ worth_reading.url }}" target="_blank">{{ worth_reading.title }}</a>
-      <div class="wr-source">{{ worth_reading.source }}</div>
-      <p>{{ worth_reading.reason }}</p>
-    </div>
   </div>
 
   <!-- ARTICLES -->
   <div class="section" id="section-articles">
     <div class="page-header">
-      <div class="eyebrow">Source Intelligence</div>
-      <h2>Articles</h2>
-      <div class="meta">{{ date }} · All sources</div>
+      <div class="eyebrow">Signal Sources · {{ date }}</div>
+      <h2>Articles & Posts</h2>
+      <div class="meta">Curated from RSS, X/Twitter, and monitored publications</div>
     </div>
-    {% for section in tags %}
+    {% for group in tags %}
     <div class="tag-group">
-      <div class="tag-name">{{ section.tag }}</div>
-      {% for article in section.articles %}
-      <div class="article-card">
-        <a class="article-title" href="{{ article.url }}" target="_blank">{{ article.title }}</a>
-        <div class="article-meta">
-          {{ article.date }} &mdash; <a href="{{ article.url }}" target="_blank">{{ article.source }}</a>
-        </div>
-        <div class="article-summary">{{ article.summary }}</div>
+      <div class="tag-name">{{ group.tag }}</div>
+      {% for a in group.articles %}
+      <div class="article-item">
+        <a class="article-title" href="{{ a.url }}" target="_blank" rel="noopener">{{ a.title }}</a>
+        <div class="article-meta">{{ a.source }} · {{ a.date }}</div>
+        <div class="article-summary">{{ a.summary }}</div>
       </div>
       {% endfor %}
     </div>
@@ -684,116 +393,186 @@
   <!-- STUDIO -->
   <div class="section" id="section-studio">
     <div class="page-header">
-      <div class="eyebrow">Content Studio</div>
-      <h2>Outputs</h2>
-      <div class="meta">{{ date }} · Generated formats</div>
-    </div>
-    <div class="studio-grid">
-
-      <!-- Podcast -->
-      <div class="studio-card">
-        <div class="studio-card-icon">🎙️</div>
-        <div class="studio-card-name">Podcast</div>
-        <div class="studio-card-desc">Two-host deep dive on today's most important AI & entrepreneurship stories.</div>
-        {% if audio_filename %}
-        <span class="studio-card-status status-ready">Ready</span>
-        <div class="studio-audio-player">
-          <audio controls src="briefs/{{ audio_filename }}" style="width:100%;height:36px;"></audio>
-        </div>
-        {% else %}
-        <span class="studio-card-status status-none">Not generated</span>
-        <p style="font-size:12px;color:var(--muted);">Run today's brief to generate the podcast.</p>
-        {% endif %}
-      </div>
-
-      <!-- Infographic -->
-      <div class="studio-card">
-        <div class="studio-card-icon">🖼️</div>
-        <div class="studio-card-name">Infographic</div>
-        <div class="studio-card-desc">Visual summary of today's key developments and signals.</div>
-        {% if infographic_filename %}
-        <span class="studio-card-status status-ready">Ready</span>
-        <div class="studio-infographic">
-          <a href="briefs/{{ infographic_filename }}" target="_blank">
-            <img src="briefs/{{ infographic_filename }}" alt="Today's infographic"/>
-          </a>
-        </div>
-        {% else %}
-        <span class="studio-card-status status-none">Not generated</span>
-        <p style="font-size:12px;color:var(--muted);">Run today's brief to generate the infographic.</p>
-        {% endif %}
-      </div>
-
-      <!-- Podcast Script -->
-      <div class="studio-card">
-        <div class="studio-card-icon">📝</div>
-        <div class="studio-card-name">Podcast Script</div>
-        <div class="studio-card-desc">Full transcript of today's podcast — read along or use as a reference.</div>
-        <span class="studio-card-status status-ready">Ready</span>
-        <button class="studio-btn studio-btn-primary" onclick="toggleScript()">View Script</button>
-      </div>
-
-      <!-- Quiz -->
-      <div class="studio-card">
-        <div class="studio-card-icon">🧠</div>
-        <div class="studio-card-name">Student Quiz</div>
-        <div class="studio-card-desc">5 multiple choice questions based on today's brief — ready to use in class.</div>
-        <span class="studio-card-status" id="quiz-status">
-          <span class="studio-card-status status-none">Not generated</span>
-        </span>
-        <button class="studio-btn studio-btn-primary" id="quiz-btn" onclick="generateQuiz()">Generate Quiz</button>
-      </div>
-
-      <!-- Slide Deck -->
-      <div class="studio-card">
-        <div class="studio-card-icon">📊</div>
-        <div class="studio-card-name">Slide Outline</div>
-        <div class="studio-card-desc">A structured slide-by-slide outline of today's brief — paste into any presentation tool.</div>
-        <span class="studio-card-status" id="slides-status">
-          <span class="studio-card-status status-none">Not generated</span>
-        </span>
-        <button class="studio-btn studio-btn-primary" id="slides-btn" onclick="generateSlides()">Generate Outline</button>
-      </div>
-
-      <!-- Mind Map -->
-      <div class="studio-card">
-        <div class="studio-card-icon">🗺️</div>
-        <div class="studio-card-name">Mind Map</div>
-        <div class="studio-card-desc">Visual map of how today's stories connect across themes.</div>
-        <span class="studio-card-status status-none">Coming soon</span>
-      </div>
-      
-      <!-- Mind Map (coming) -->
-      <div class="studio-card">
-        <div class="studio-card-icon">🗺️</div>
-        <div class="studio-card-name">Mind Map</div>
-        <div class="studio-card-desc">Visual map of how today's stories connect across themes.</div>
-        <span class="studio-card-status status-none">Coming soon</span>
-      </div>
-
+      <div class="eyebrow">Studio · {{ date }}</div>
+      <h2>Output Formats</h2>
+      <div class="meta">Every format generated from today's brief</div>
     </div>
 
-    <!-- Inline script viewer -->
-    <div id="listen-script" style="display:none; margin-top:32px;">
-      <div class="block-label" style="margin-bottom:16px;">Podcast Script — {{ date }}</div>
-      {% for line in podcast_script %}
-      <div style="display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;">
-        <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;background:{% if line.speaker == 'Alex' %}var(--navy){% else %}#f0f0f0{% endif %};color:{% if line.speaker == 'Alex' %}#fff{% else %}#333{% endif %};min-width:52px;text-align:center;flex-shrink:0;margin-top:2px;">{{ line.speaker }}</span>
-        <p style="font-size:14px;line-height:1.75;color:#333;">{{ line.line }}</p>
+    <p class="studio-intro">Click any format to expand it. Podcast and infographic are generated each morning. Quiz and slide deck are generated by AutoContent — click to generate.</p>
+
+    <div class="studio-panels">
+
+      <!-- PODCAST -->
+      <div class="studio-panel {% if audio_filename %}open{% endif %}" id="panel-podcast" onclick="togglePanel('podcast')">
+        <div class="studio-panel-header">
+          <div class="sp-icon">🎙️</div>
+          <div class="sp-info">
+            <div class="sp-name">Podcast</div>
+            <div class="sp-desc">Two-host deep dive on today's most important stories</div>
+          </div>
+          <div class="sp-right">
+            {% if audio_filename %}
+            <span class="sp-status ready">Ready</span>
+            {% else %}
+            <span class="sp-status none">Not generated</span>
+            {% endif %}
+            <span class="sp-chevron">▼</span>
+          </div>
+        </div>
+        <div class="studio-panel-body">
+          {% if audio_filename %}
+          <div class="audio-player-wrap">
+            <div class="audio-ep-title">Foreword Intelligence · {{ date }}</div>
+            <audio controls src="briefs/{{ audio_filename }}"></audio>
+          </div>
+          {% else %}
+          <p style="font-size:13px;color:var(--muted);padding-top:4px;">Run today's brief to generate the podcast.</p>
+          {% endif %}
+        </div>
       </div>
-      {% endfor %}
+
+      <!-- INFOGRAPHIC -->
+      <div class="studio-panel" id="panel-infographic" onclick="togglePanel('infographic')">
+        <div class="studio-panel-header">
+          <div class="sp-icon">🖼️</div>
+          <div class="sp-info">
+            <div class="sp-name">Infographic</div>
+            <div class="sp-desc">Visual one-pager — key developments at a glance</div>
+          </div>
+          <div class="sp-right">
+            {% if infographic_filename %}
+            <span class="sp-status ready">Ready</span>
+            {% else %}
+            <span class="sp-status none">Not generated</span>
+            {% endif %}
+            <span class="sp-chevron">▼</span>
+          </div>
+        </div>
+        <div class="studio-panel-body">
+          {% if infographic_filename %}
+          <div class="infographic-wrap">
+            <img src="briefs/{{ infographic_filename }}" alt="Today's Infographic"/>
+            <a href="briefs/{{ infographic_filename }}" target="_blank">↗ Open full size</a>
+          </div>
+          {% else %}
+          <p style="font-size:13px;color:var(--muted);padding-top:4px;">Run today's brief to generate the infographic.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- PODCAST SCRIPT -->
+      <div class="studio-panel" id="panel-script" onclick="togglePanel('script')">
+        <div class="studio-panel-header">
+          <div class="sp-icon">📝</div>
+          <div class="sp-info">
+            <div class="sp-name">Podcast Script</div>
+            <div class="sp-desc">Full transcript — read along or reference in class</div>
+          </div>
+          <div class="sp-right">
+            <span class="sp-status ready">Ready</span>
+            <span class="sp-chevron">▼</span>
+          </div>
+        </div>
+        <div class="studio-panel-body">
+          <div class="script-wrap">
+            {% for line in podcast_script %}
+            <div class="script-line">
+              <span class="script-speaker {% if line.speaker == 'Alex' %}alex{% else %}jordan{% endif %}">{{ line.speaker }}</span>
+              <p class="script-text">{{ line.line }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- QUIZ — AutoContent -->
+      <div class="studio-panel" id="panel-quiz" onclick="togglePanel('quiz')">
+        <div class="studio-panel-header">
+          <div class="sp-icon">🧠</div>
+          <div class="sp-info">
+            <div class="sp-name">Student Quiz</div>
+            <div class="sp-desc">Multiple choice questions ready to use in class today</div>
+          </div>
+          <div class="sp-right">
+            {% if quiz_filename %}
+            <span class="sp-status ready" id="quiz-badge">Ready</span>
+            {% else %}
+            <span class="sp-status none" id="quiz-badge">Not generated</span>
+            {% endif %}
+            <span class="sp-chevron">▼</span>
+          </div>
+        </div>
+        <div class="studio-panel-body" onclick="event.stopPropagation()">
+          <div id="quiz-content">
+            {% if quiz_data %}
+            <div class="quiz-output" id="quiz-rendered"></div>
+            {% else %}
+            <p style="font-size:13px;color:var(--muted);padding-top:4px;margin-bottom:12px;">Generate a quiz from today's brief using AutoContent AI.</p>
+            <button class="generate-btn" id="quiz-btn" onclick="generateQuizAutoContent()">Generate Quiz</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE DECK — AutoContent -->
+      <div class="studio-panel" id="panel-slides" onclick="togglePanel('slides')">
+        <div class="studio-panel-header">
+          <div class="sp-icon">📊</div>
+          <div class="sp-info">
+            <div class="sp-name">Slide Outline</div>
+            <div class="sp-desc">10-slide deck outline with speaker notes — paste into any tool</div>
+          </div>
+          <div class="sp-right">
+            {% if slides_filename %}
+            <span class="sp-status ready" id="slides-badge">Ready</span>
+            {% else %}
+            <span class="sp-status none" id="slides-badge">Not generated</span>
+            {% endif %}
+            <span class="sp-chevron">▼</span>
+          </div>
+        </div>
+        <div class="studio-panel-body" onclick="event.stopPropagation()">
+          <div id="slides-content">
+            {% if slides_data %}
+            <div id="slides-rendered"></div>
+            {% else %}
+            <p style="font-size:13px;color:var(--muted);padding-top:4px;margin-bottom:12px;">Generate a slide deck outline from today's brief using AutoContent AI.</p>
+            <button class="generate-btn" id="slides-btn" onclick="generateSlidesAutoContent()">Generate Slide Outline</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- MIND MAP — D3 -->
+      <div class="studio-panel" id="panel-mindmap" onclick="togglePanel('mindmap')">
+        <div class="studio-panel-header">
+          <div class="sp-icon">🗺️</div>
+          <div class="sp-info">
+            <div class="sp-name">Mind Map</div>
+            <div class="sp-desc">How today's stories connect across themes</div>
+          </div>
+          <div class="sp-right">
+            <span class="sp-status ready">Live</span>
+            <span class="sp-chevron">▼</span>
+          </div>
+        </div>
+        <div class="studio-panel-body" onclick="event.stopPropagation()">
+          <div id="mindmap-container"></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- STUDENT QUESTIONS -->
   <div class="section" id="section-questions">
     <div class="page-header">
-      <div class="eyebrow">Teaching Assistant</div>
+      <div class="eyebrow">Teaching Assistant · {{ date }}</div>
       <h2>Student Questions</h2>
-      <div class="meta">{{ date }} · Anticipated questions based on today's brief</div>
+      <div class="meta">Anticipated questions based on today's brief</div>
     </div>
     <div id="student-questions-container">
-      <p style="color:var(--muted);font-size:14px;">Generating student questions based on today's brief...</p>
+      <p style="color:var(--muted);font-size:13.5px;">Generating questions based on today's brief...</p>
     </div>
   </div>
 
@@ -802,20 +581,17 @@
     <div class="page-header">
       <div class="eyebrow">Personal Context</div>
       <h2>My Sources</h2>
-      <div class="meta">Upload your syllabus, notes, or textbooks to personalize your brief</div>
+      <div class="meta">Upload your syllabus or notes to personalize your brief</div>
     </div>
-
     <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
       <div class="upload-icon">📎</div>
       <h3>Drop files here or click to upload</h3>
       <p>PDF, Word, or text files · Syllabus, textbook chapters, research notes</p>
       <input type="file" id="file-input" multiple accept=".pdf,.docx,.txt,.md" onchange="handleFiles(this.files)"/>
     </div>
-
-    <div class="uploaded-files" id="uploaded-files"></div>
-
+    <div class="uploaded-files" id="uploaded-files" style="margin-top:20px;"></div>
     <div class="upload-info">
-      <strong>How this works:</strong> Files you upload are saved in your browser and referenced when generating your brief. Your syllabus tells the brief which week's material each story is relevant to. Research notes add context about topics you're already tracking.
+      <strong>How this works:</strong> Files you upload are saved in your browser and referenced when generating your brief. Your syllabus tells the brief which week's material each story is relevant to.
     </div>
   </div>
 
@@ -827,12 +603,11 @@
       <div class="meta">Your feedback shapes tomorrow's brief</div>
     </div>
     <div class="rating-btns">
-      <button class="rating-btn" onclick="selectRating(1,this)">1 — Useful</button>
-      <button class="rating-btn" onclick="selectRating(2,this)">2 — Missed Something</button>
-      <button class="rating-btn" onclick="selectRating(3,this)">3 — Not Relevant</button>
+      <button class="rating-btn" onclick="selectRating(1,this)">✓ Useful</button>
+      <button class="rating-btn" onclick="selectRating(2,this)">△ Missed something</button>
+      <button class="rating-btn" onclick="selectRating(3,this)">✗ Not relevant</button>
     </div>
-    <textarea class="note-area" id="note" placeholder="What was missed or irrelevant? (optional)"></textarea>
-    <br/>
+    <textarea class="note-area" id="note" placeholder="What was missed or not relevant? (optional)"></textarea>
     <button class="save-btn" onclick="saveRating()">Save Feedback</button>
     <p class="saved-msg" id="saved-msg">Saved. It will shape tomorrow's brief.</p>
   </div>
@@ -842,7 +617,7 @@
     <div class="page-header">
       <div class="eyebrow">History</div>
       <h2>Archive</h2>
-      <div class="meta">Last 7 days</div>
+      <div class="meta">Past briefs</div>
     </div>
     <ul class="archive-list" id="archive-list"></ul>
   </div>
@@ -853,14 +628,11 @@
 <div class="chat-bubble">
   <div class="chat-window" id="chat-window">
     <div class="chat-header">
-      <div>
-        <h4>Ask the Brief</h4>
-        <p>Knows today + last 7 days</p>
-      </div>
+      <div><h4>Ask the Brief</h4><p>Knows today + last 7 days</p></div>
       <button class="chat-close" onclick="toggleChat()">×</button>
     </div>
     <div class="chat-messages" id="chat-messages">
-      <div class="chat-msg assistant">Hi — I've read today's brief and the last 7 days. Ask me anything about what's happening in AI & entrepreneurship.</div>
+      <div class="chat-msg assistant">Hi — I've read today's brief. Ask me anything about what's happening in AI & entrepreneurship.</div>
     </div>
     <div class="chat-input-row">
       <input class="chat-input" id="chat-input" type="text" placeholder="Ask a question..." onkeydown="if(event.key==='Enter') sendMessage()"/>
@@ -870,259 +642,390 @@
   <button class="chat-toggle" onclick="toggleChat()">💬</button>
 </div>
 
+
 <script>
   const todayBrief = {{ today_brief_json | safe }};
   const pastBriefs = {{ past_briefs_json | safe }};
   const todayDate = "{{ date }}";
   const scriptLines = {{ podcast_script | tojson | safe }};
+  const quizDataRaw = {{ quiz_data | tojson | safe }};
+  const slidesDataRaw = {{ slides_data | tojson | safe }};
 
-  // ── NAVIGATION ──
-  function showSection(name, el) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.getElementById('section-' + name).classList.add('active');
-    if (el && el.classList) el.classList.add('active');
-    if (name === 'questions') generateStudentQuestions();
-  }
-
-  // ── STUDIO SCRIPT TOGGLE ──
+  // ── NAV ──
   function showSection(name, el) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     const target = document.getElementById('section-' + name);
     if (target) target.classList.add('active');
-    if (el && el.classList && el.classList.contains('nav-item')) el.classList.add('active');
+    if (el) el.classList.add('active');
     if (name === 'questions') generateStudentQuestions();
+    if (name === 'studio') setTimeout(renderMindMap, 100);
   }
 
-  function toggleScript() {
-    const el = document.getElementById('listen-script');
-    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  // ── STUDIO PANELS ──
+  function togglePanel(id) {
+    const panel = document.getElementById('panel-' + id);
+    const wasOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !wasOpen);
+    if (id === 'mindmap' && !wasOpen) setTimeout(renderMindMap, 50);
+  }
+
+  // ── MIND MAP HTML ──
+  let mindMapRendered = false;
+
+  function renderMindMap() {
+    if (mindMapRendered) return;
+    const container = document.getElementById('mindmap-container');
+    if (!container) return;
+    const devs = (todayBrief.report && todayBrief.report.key_developments || []).slice(0, 6);
+    const signals = (todayBrief.report && todayBrief.report.signals_to_watch || []).slice(0, 3);
+    if (!devs.length) {
+      container.innerHTML = '<p style="color:#aaa;font-size:13px;">No developments to map.</p>';
+      return;
+    }
+    const companies = ['OpenAI','Anthropic','Google','Meta','Microsoft','Apple','Amazon',
+      'NVIDIA','Qualcomm','Intel','AMD','SpaceX','Tesla','Databricks','Sequoia','a16z',
+      'Stripe','Salesforce','Hugging Face','Mistral','xAI','DeepMind'];
+
+    function getEntities(text) {
+      var found = companies.filter(function(c){ return text.indexOf(c) !== -1; });
+      return found.slice(0, 3);
+    }
+
+    var html = '<div class="mm-wrap">';
+    html += '<div class="mm-date">' + todayDate + '</div>';
+    html += '<div class="mm-connector"></div>';
+    html += '<div class="mm-branches">';
+
+    devs.forEach(function(d) {
+      var entities = getEntities(d.content || '');
+      html += '<div class="mm-branch">';
+      html += '<div class="mm-theme">' + (d.theme || 'Development') + '</div>';
+      if (entities.length) {
+        html += '<div class="mm-sub-connector"></div>';
+        html += '<div class="mm-entities">';
+        entities.forEach(function(e) {
+          html += '<div class="mm-entity">' + e + '</div>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+
+    if (signals.length) {
+      html += '<div class="mm-branch">';
+      html += '<div class="mm-theme mm-signals">Signals to Watch</div>';
+      html += '<div class="mm-sub-connector"></div>';
+      html += '<div class="mm-entities">';
+      signals.forEach(function(s) {
+        var label = s.length > 55 ? s.substring(0, 55) + '...' : s;
+        html += '<div class="mm-entity mm-signal" title="' + s + '">' + label + '</div>';
+      });
+      html += '</div></div>';
+    }
+
+    html += '</div></div>';
+    container.innerHTML = html;
+    mindMapRendered = true;
+  }
+
+  // ── QUIZ via AutoContent (browser polling) ──
+  async function generateQuizAutoContent() {
+    const btn = document.getElementById('quiz-btn');
+    if (!btn) return;
+    btn.textContent = 'Generating via AutoContent...';
+    btn.disabled = true;
+    document.getElementById('quiz-badge').textContent = 'Generating';
+    document.getElementById('quiz-badge').className = 'sp-status generating';
+
+    const briefText = buildBriefText();
+    try {
+      const createRes = await fetch('https://api.autocontentapi.com/content/Create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer {{ autocontent_api_key }}' },
+        body: JSON.stringify({
+          resources: [{ type: 'text', content: briefText }],
+          text: 'Generate a 5-question multiple choice quiz based on this AI and entrepreneurship intelligence brief. Focus on key developments and strategic implications.',
+          outputType: 'quiz',
+          quizDifficulty: 'medium'
+        })
+      });
+      const createData = await createRes.json();
+      const rid = createData.request_id || createData.requestId || createData.id;
+      if (!rid) { showQuizError(btn); return; }
+
+      // Poll for completion
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
+        if (attempts > 90) { clearInterval(poll); showQuizError(btn); return; }
+        try {
+          const sr = await fetch('https://api.autocontentapi.com/content/Status/' + rid, {
+            headers: { 'Authorization': 'Bearer {{ autocontent_api_key }}' }
+          });
+          const sd = await sr.json();
+          const status = sd.status;
+          if (status === 100 || status === 'completed') {
+            clearInterval(poll);
+            const quizRaw = sd.response_text || sd.url || '';
+            renderQuiz(quizRaw);
+            btn.style.display = 'none';
+            document.getElementById('quiz-badge').textContent = 'Ready';
+            document.getElementById('quiz-badge').className = 'sp-status ready';
+          } else if (status === 'failed' || status === -1) {
+            clearInterval(poll); showQuizError(btn);
+          }
+        } catch(e) { /* keep polling */ }
+      }, 8000);
+    } catch(e) { showQuizError(btn); }
+  }
+
+  function showQuizError(btn) {
+    if (btn) { btn.textContent = 'Try Again'; btn.disabled = false; }
+    document.getElementById('quiz-badge').textContent = 'Error';
+    document.getElementById('quiz-badge').className = 'sp-status none';
+  }
+
+  function renderQuiz(raw) {
+    let questions = [];
+    try { const p = JSON.parse(raw); questions = p.questions || p; } catch(e) {
+      // Try to parse as text
+      document.getElementById('quiz-content').innerHTML = '<pre style="font-size:13px;line-height:1.7;white-space:pre-wrap;color:#333;">' + raw + '</pre>';
+      return;
+    }
+    let html = '<div class="quiz-output">';
+    questions.forEach((q, i) => {
+      html += `<div class="quiz-q">
+        <div class="quiz-q-num">Question ${i+1}</div>
+        <div class="quiz-q-text">${q.question || q.q || ''}</div>
+        ${(q.options || q.choices || []).map(o => `<div class="quiz-option">${o}</div>`).join('')}
+        ${q.answer ? `<div class="quiz-answer"><strong>Answer: ${q.answer}</strong>${q.explanation ? ' — ' + q.explanation : ''}</div>` : ''}
+      </div>`;
+    });
+    html += '</div>';
+    document.getElementById('quiz-content').innerHTML = html;
+  }
+
+  // ── SLIDES via AutoContent ──
+  async function generateSlidesAutoContent() {
+    const btn = document.getElementById('slides-btn');
+    if (!btn) return;
+    btn.textContent = 'Generating via AutoContent...';
+    btn.disabled = true;
+    document.getElementById('slides-badge').textContent = 'Generating';
+    document.getElementById('slides-badge').className = 'sp-status generating';
+
+    const briefText = buildBriefText();
+    try {
+      const createRes = await fetch('https://api.autocontentapi.com/content/Create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer {{ autocontent_api_key }}' },
+        body: JSON.stringify({
+          resources: [{ type: 'text', content: briefText }],
+          text: 'Generate a detailed 10-slide presentation deck from this AI and entrepreneurship intelligence brief. Include speaker notes for each slide.',
+          outputType: 'slide_deck',
+          slideDeckFormat: 'detailed'
+        })
+      });
+      const createData = await createRes.json();
+      const rid = createData.request_id || createData.requestId || createData.id;
+      if (!rid) { showSlidesError(btn); return; }
+
+      let attempts = 0;
+      const poll = setInterval(async () => {
+        attempts++;
+        if (attempts > 90) { clearInterval(poll); showSlidesError(btn); return; }
+        try {
+          const sr = await fetch('https://api.autocontentapi.com/content/Status/' + rid, {
+            headers: { 'Authorization': 'Bearer {{ autocontent_api_key }}' }
+          });
+          const sd = await sr.json();
+          const status = sd.status;
+          if (status === 100 || status === 'completed') {
+            clearInterval(poll);
+            const slideUrl = sd.url || sd.slide_url || sd.slideUrl || sd.response_text || '';
+            renderSlides(slideUrl);
+            btn.style.display = 'none';
+            document.getElementById('slides-badge').textContent = 'Ready';
+            document.getElementById('slides-badge').className = 'sp-status ready';
+          } else if (status === 'failed' || status === -1) {
+            clearInterval(poll); showSlidesError(btn);
+          }
+        } catch(e) {}
+      }, 8000);
+    } catch(e) { showSlidesError(btn); }
+  }
+
+  function showSlidesError(btn) {
+    if (btn) { btn.textContent = 'Try Again'; btn.disabled = false; }
+    document.getElementById('slides-badge').textContent = 'Error';
+    document.getElementById('slides-badge').className = 'sp-status none';
+  }
+
+  function renderSlides(raw) {
+    // If it's a URL (PDF link), show download link
+    if (raw.startsWith('http')) {
+      document.getElementById('slides-content').innerHTML = `
+        <div style="padding-top:8px;">
+          <p style="font-size:13px;color:#444;margin-bottom:12px;">Your slide deck is ready.</p>
+          <a href="${raw}" target="_blank" style="display:inline-block;padding:10px 20px;background:var(--navy);color:#fff;text-decoration:none;font-size:13px;font-weight:600;">↗ Open Slide Deck</a>
+        </div>`;
+      return;
+    }
+    // Try JSON
+    let slides = [];
+    try { const p = JSON.parse(raw); slides = p.slides || p; } catch(e) {
+      document.getElementById('slides-content').innerHTML = '<pre style="font-size:13px;line-height:1.7;white-space:pre-wrap;color:#333;">' + raw + '</pre>';
+      return;
+    }
+    let html = '<div style="margin-top:8px;">';
+    slides.forEach(s => {
+      html += `<div class="slide-item">
+        <div class="slide-num">${s.number || ''}</div>
+        <div class="slide-content">
+          <div class="slide-title">${s.title || ''}</div>
+          ${(s.bullets || []).map(b => `<div class="slide-bullet">${b}</div>`).join('')}
+          ${s.speaker_note ? `<div class="slide-note">${s.speaker_note}</div>` : ''}
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+    document.getElementById('slides-content').innerHTML = html;
+  }
+
+  // ── RENDER PRE-GENERATED QUIZ/SLIDES ──
+  if (quizDataRaw) { try { renderQuiz(typeof quizDataRaw === 'string' ? quizDataRaw : JSON.stringify(quizDataRaw)); } catch(e){} }
+  if (slidesDataRaw) { try { renderSlides(typeof slidesDataRaw === 'string' ? slidesDataRaw : JSON.stringify(slidesDataRaw)); } catch(e){} }
+
+  function buildBriefText() {
+    const r = todayBrief.report || {};
+    let t = 'Daily Intelligence Brief — ' + todayDate + '\n';
+    t += (r.big_picture || '') + '\n';
+    (r.key_developments || []).forEach(d => t += d.theme + ': ' + d.content + '\n');
+    (r.signals_to_watch || []).forEach(s => t += '- ' + s + '\n');
+    t += (r.polymarket_intelligence || '') + '\n';
+    t += (r.funding_intelligence || '') + '\n';
+    return t;
   }
 
   // ── STUDENT QUESTIONS ──
   let questionsLoaded = false;
-
   async function generateStudentQuestions() {
     if (questionsLoaded) return;
     const container = document.getElementById('student-questions-container');
-
     let apiKey = localStorage.getItem('anthropic-api-key');
     if (!apiKey) {
       apiKey = prompt('Enter your Anthropic API key to generate student questions:\n(Stored locally only)');
-      if (!apiKey) {
-        container.innerHTML = '<p style="color:var(--muted);font-size:14px;">API key required. Click Student Questions to try again.</p>';
-        return;
-      }
+      if (!apiKey) { container.innerHTML = '<p style="color:var(--muted);font-size:13.5px;">API key required.</p>'; return; }
       localStorage.setItem('anthropic-api-key', apiKey);
     }
-
-    container.innerHTML = '<p style="color:var(--muted);font-size:14px;">Generating questions based on today\'s brief...</p>';
-
-    const briefSummary = `Today's date: ${todayDate}
-Big picture: ${todayBrief.report?.big_picture || ''}
-Key developments: ${(todayBrief.report?.key_developments || []).map(d => d.theme + ': ' + d.content).join('\n')}
-Signals: ${(todayBrief.report?.signals_to_watch || []).join(', ')}`;
-
+    container.innerHTML = '<p style="color:var(--muted);font-size:13.5px;">Generating questions...</p>';
+    const briefSummary = `Today: ${todayDate}\nBig picture: ${todayBrief.report?.big_picture || ''}\nDevelopments: ${(todayBrief.report?.key_developments || []).map(d => d.theme + ': ' + d.content).join('\n')}`;
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1200,
-          messages: [{
-            role: 'user',
-            content: `You are helping a professor prepare for class. Based on this AI & entrepreneurship intelligence brief, generate the 4 most likely questions students will ask in class today, and a sharp prepared answer for each one.
-
-Brief:
-${briefSummary}
-
-Return JSON only:
-{"questions": [{"question": "...", "answer": "..."}, ...]}
-
-Make the questions feel like real curious students asking — not formal exam questions. Make the answers sharp, current, and something the professor would be proud to give.`
-          }]
-        })
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1200, messages: [{ role: 'user', content: `Based on this AI & entrepreneurship brief, generate 4 questions students will ask in class today and a sharp prepared answer for each.\n\nBrief:\n${briefSummary}\n\nReturn JSON only:\n{"questions": [{"question": "...", "answer": "..."}]}` }] })
       });
-
       const data = await res.json();
-      const text = data.content[0].text.replace(/```json|```/g, '').trim();
-      const parsed = JSON.parse(text);
-
-      container.innerHTML = parsed.questions.map((q, i) => `
+      const parsed = JSON.parse(data.content[0].text.replace(/\`\`\`json|\`\`\`/g,'').trim());
+      container.innerHTML = parsed.questions.map((q,i) => `
         <div class="student-q">
           <div class="q-label">Question ${i+1}</div>
           <div class="q-text">"${q.question}"</div>
           <div class="q-label" style="margin-top:12px;">Prepared Answer</div>
           <div class="a-text">${q.answer}</div>
-        </div>
-      `).join('');
-
+        </div>`).join('');
       questionsLoaded = true;
-    } catch(e) {
-      container.innerHTML = '<p style="color:var(--muted);font-size:14px;">Could not generate questions. Check your API key and try again.</p>';
-    }
+    } catch(e) { container.innerHTML = '<p style="color:var(--muted);font-size:13.5px;">Could not generate. Check API key.</p>'; }
   }
 
   // ── UPLOAD ──
   const uploadZone = document.getElementById('upload-zone');
   uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
   uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-  uploadZone.addEventListener('drop', e => {
-    e.preventDefault();
-    uploadZone.classList.remove('drag-over');
-    handleFiles(e.dataTransfer.files);
-  });
-
+  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); handleFiles(e.dataTransfer.files); });
   function handleFiles(files) {
     const saved = JSON.parse(localStorage.getItem('uploaded-sources') || '[]');
-    Array.from(files).forEach(file => {
-      const existing = saved.find(f => f.name === file.name);
-      if (!existing) {
-        saved.push({ name: file.name, size: file.size, date: new Date().toISOString().slice(0,10) });
-      }
-    });
+    Array.from(files).forEach(file => { if (!saved.find(f => f.name === file.name)) saved.push({ name: file.name, size: file.size, date: new Date().toISOString().slice(0,10) }); });
     localStorage.setItem('uploaded-sources', JSON.stringify(saved));
     renderUploadedFiles();
   }
-
   function renderUploadedFiles() {
     const saved = JSON.parse(localStorage.getItem('uploaded-sources') || '[]');
-    const container = document.getElementById('uploaded-files');
-    if (saved.length === 0) { container.innerHTML = ''; return; }
-    container.innerHTML = saved.map((f, i) => `
-      <div class="uploaded-file">
-        <div>
-          <div class="fname">📄 ${f.name}</div>
-          <div class="fsize">${(f.size/1024).toFixed(0)} KB · Added ${f.date}</div>
-        </div>
-        <button onclick="removeFile(${i})">×</button>
-      </div>
-    `).join('');
+    const c = document.getElementById('uploaded-files');
+    c.innerHTML = saved.map((f,i) => `<div class="uploaded-file"><div><div class="fname">📄 ${f.name}</div><div class="fsize">${(f.size/1024).toFixed(0)} KB · ${f.date}</div></div><button onclick="removeFile(${i})">×</button></div>`).join('');
   }
-
   function removeFile(i) {
     const saved = JSON.parse(localStorage.getItem('uploaded-sources') || '[]');
-    saved.splice(i, 1);
+    saved.splice(i,1);
     localStorage.setItem('uploaded-sources', JSON.stringify(saved));
     renderUploadedFiles();
   }
-
   renderUploadedFiles();
 
   // ── FEEDBACK ──
   let selectedRating = null;
-
   function selectRating(val, btn) {
     selectedRating = val;
     document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
   }
-
   function saveRating() {
     if (!selectedRating) { alert('Please select a rating.'); return; }
     const note = document.getElementById('note').value;
-    fetch('/save-feedback', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ date: todayDate, rating: selectedRating, note })
-    })
-    .then(r => r.json())
-    .then(d => { if (d.ok) document.getElementById('saved-msg').style.display = 'block'; })
-    .catch(() => {
-      const log = JSON.parse(localStorage.getItem('brief-log') || '[]');
-      const idx = log.findIndex(e => e.date === todayDate);
-      const entry = { date: todayDate, rating: selectedRating, note };
-      if (idx >= 0) log[idx] = entry; else log.push(entry);
-      localStorage.setItem('brief-log', JSON.stringify(log));
-      document.getElementById('saved-msg').style.display = 'block';
-    });
+    const log = JSON.parse(localStorage.getItem('brief-log') || '[]');
+    const idx = log.findIndex(e => e.date === todayDate);
+    const entry = { date: todayDate, rating: selectedRating, note };
+    if (idx >= 0) log[idx] = entry; else log.push(entry);
+    localStorage.setItem('brief-log', JSON.stringify(log));
+    document.getElementById('saved-msg').style.display = 'block';
   }
 
   // ── ARCHIVE ──
   function loadArchive() {
     const log = JSON.parse(localStorage.getItem('brief-log') || '[]');
     const list = document.getElementById('archive-list');
-    const labels = { 1: '✓ Useful', 2: '△ Missed something', 3: '✗ Not relevant' };
+    const labels = { 1:'✓ Useful', 2:'△ Missed something', 3:'✗ Not relevant' };
     const last7 = log.slice(-7).reverse();
-    if (last7.length === 0) {
-      list.innerHTML = '<li style="color:#bbb;border:none;">No previous briefs rated yet.</li>';
-      return;
-    }
-    last7.forEach(entry => {
+    if (!last7.length) { list.innerHTML = '<li style="color:#CCC;border:none;">No briefs rated yet.</li>'; return; }
+    last7.forEach(e => {
       const li = document.createElement('li');
-      li.innerHTML = `<a href="briefs/brief_${entry.date}.html">${entry.date}</a><span>${labels[entry.rating]||''}</span>`;
+      li.innerHTML = `<a href="briefs/brief_${e.date}.html">${e.date}</a><span>${labels[e.rating]||''}</span>`;
       list.appendChild(li);
     });
   }
   loadArchive();
 
   // ── CHATBOT ──
-  let chatOpen = false;
-  let chatHistory = [];
-
+  let chatOpen = false, chatHistory = [];
   function toggleChat() {
     chatOpen = !chatOpen;
-    const win = document.getElementById('chat-window');
-    chatOpen ? win.classList.add('open') : win.classList.remove('open');
+    document.getElementById('chat-window').classList.toggle('open', chatOpen);
   }
-
   async function sendMessage() {
     const input = document.getElementById('chat-input');
     const msg = input.value.trim();
     if (!msg) return;
     input.value = '';
-
     let apiKey = localStorage.getItem('anthropic-api-key');
-    if (!apiKey) {
-      apiKey = prompt('Enter your Anthropic API key:\n(Stored locally only)');
-      if (!apiKey) return;
-      localStorage.setItem('anthropic-api-key', apiKey);
-    }
-
+    if (!apiKey) { apiKey = prompt('Enter your Anthropic API key:'); if (!apiKey) return; localStorage.setItem('anthropic-api-key', apiKey); }
     appendMsg('user', msg);
     appendMsg('thinking', 'Thinking...');
     chatHistory.push({ role: 'user', content: msg });
-
-    const ctx = `You are an AI & entrepreneurship intelligence analyst. You have access to today's brief and the last 7 days. Be concise but insightful.
-
-Today (${todayDate}): ${JSON.stringify(todayBrief?.report || {})}
-
-Past briefs: ${JSON.stringify(pastBriefs.map(b => ({ date: b.date, big_picture: b.report?.big_picture })))}`;
-
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 800,
-          system: ctx,
-          messages: chatHistory
-        })
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 800, system: `You are an AI & entrepreneurship intelligence analyst. Today (${todayDate}): ${JSON.stringify(todayBrief?.report || {})}`, messages: chatHistory })
       });
       const data = await res.json();
       const reply = data.content[0].text;
       removeThinking();
       appendMsg('assistant', reply);
       chatHistory.push({ role: 'assistant', content: reply });
-    } catch(e) {
-      removeThinking();
-      appendMsg('assistant', 'Something went wrong — check your API key.');
-    }
+    } catch(e) { removeThinking(); appendMsg('assistant', 'Something went wrong.'); }
   }
-
   function appendMsg(role, text) {
     const msgs = document.getElementById('chat-messages');
     const div = document.createElement('div');
@@ -1131,164 +1034,7 @@ Past briefs: ${JSON.stringify(pastBriefs.map(b => ({ date: b.date, big_picture: 
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
   }
-
-  function removeThinking() {
-    const t = document.querySelector('.chat-msg.thinking');
-    if (t) t.remove();
-  }
-// ── QUIZ GENERATOR ──
-async function generateQuiz() {
-    const btn = document.getElementById('quiz-btn');
-    const statusEl = document.getElementById('quiz-status');
-    btn.textContent = 'Generating...';
-    btn.disabled = true;
-
-    let apiKey = localStorage.getItem('anthropic-api-key');
-    if (!apiKey) {
-      apiKey = prompt('Enter your Anthropic API key:\n(Stored locally only)');
-      if (!apiKey) { btn.textContent = 'Generate Quiz'; btn.disabled = false; return; }
-      localStorage.setItem('anthropic-api-key', apiKey);
-    }
-
-    const briefSummary = `Date: ${todayDate}
-Big picture: ${todayBrief.report?.big_picture || ''}
-Developments: ${(todayBrief.report?.key_developments || []).map(d => d.theme + ': ' + d.content).join('\n')}
-Signals: ${(todayBrief.report?.signals_to_watch || []).join(', ')}`;
-
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1200,
-          messages: [{
-            role: 'user',
-            content: `Based on this AI & entrepreneurship intelligence brief, generate 5 multiple choice quiz questions a professor could use in class today. Make them genuinely thought-provoking — not just factual recall, but questions that test whether students understand the implications.
-
-Brief:
-${briefSummary}
-
-Return JSON only:
-{"questions": [{"question": "...", "options": ["A) ...", "B) ...", "C) ...", "D) ..."], "answer": "A", "explanation": "..."}]}`
-          }]
-        })
-      });
-      const data = await res.json();
-      const text = data.content[0].text.replace(/\`\`\`json|\`\`\`/g, '').trim();
-      const parsed = JSON.parse(text);
-
-      // Render quiz below the grid
-      let html = '<div style="margin-top:32px;"><div class="block-label" style="margin-bottom:16px;">Student Quiz — ' + todayDate + '</div>';
-      parsed.questions.forEach((q, i) => {
-        html += `<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:20px;margin-bottom:16px;">
-          <div style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Question ${i+1}</div>
-          <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:12px;">${q.question}</div>
-          ${q.options.map(o => `<div style="font-size:14px;color:#444;padding:6px 0;border-bottom:1px solid #f5f5f5;">${o}</div>`).join('')}
-          <div style="margin-top:12px;padding:10px 14px;background:#e8f5e9;font-size:13px;color:#2e7d32;"><strong>Answer: ${q.answer}</strong> — ${q.explanation}</div>
-        </div>`;
-      });
-      html += '</div>';
-
-      const existing = document.getElementById('quiz-output');
-      if (existing) existing.remove();
-      const div = document.createElement('div');
-      div.id = 'quiz-output';
-      div.innerHTML = html;
-      document.getElementById('section-studio').appendChild(div);
-
-      statusEl.innerHTML = '<span class="studio-card-status status-ready">Ready</span>';
-      btn.textContent = 'Regenerate';
-      btn.disabled = false;
-    } catch(e) {
-      btn.textContent = 'Try Again';
-      btn.disabled = false;
-    }
-  }
-
-  // ── SLIDE OUTLINE GENERATOR ──
-  async function generateSlides() {
-    const btn = document.getElementById('slides-btn');
-    const statusEl = document.getElementById('slides-status');
-    btn.textContent = 'Generating...';
-    btn.disabled = true;
-
-    let apiKey = localStorage.getItem('anthropic-api-key');
-    if (!apiKey) {
-      apiKey = prompt('Enter your Anthropic API key:\n(Stored locally only)');
-      if (!apiKey) { btn.textContent = 'Generate Outline'; btn.disabled = false; return; }
-      localStorage.setItem('anthropic-api-key', apiKey);
-    }
-
-    const briefSummary = `Date: ${todayDate}
-Big picture: ${todayBrief.report?.big_picture || ''}
-Developments: ${(todayBrief.report?.key_developments || []).map(d => d.theme + ': ' + d.content).join('\n')}
-Signals: ${(todayBrief.report?.signals_to_watch || []).join(', ')}
-Job signals: ${todayBrief.report?.job_market_signals || ''}
-VC funding: ${todayBrief.report?.funding_intelligence || ''}`;
-
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 1500,
-          messages: [{
-            role: 'user',
-            content: `Based on this AI & entrepreneurship intelligence brief, generate a 10-slide presentation outline a professor could use to open class today. Each slide should have a title, 3 bullet points, and a speaker note.
-
-Brief:
-${briefSummary}
-
-Return JSON only:
-{"slides": [{"number": 1, "title": "...", "bullets": ["...", "...", "..."], "speaker_note": "..."}]}`
-          }]
-        })
-      });
-      const data = await res.json();
-      const text = data.content[0].text.replace(/\`\`\`json|\`\`\`/g, '').trim();
-      const parsed = JSON.parse(text);
-
-      let html = '<div style="margin-top:32px;"><div class="block-label" style="margin-bottom:16px;">Slide Outline — ' + todayDate + '</div>';
-      parsed.slides.forEach(s => {
-        html += `<div style="background:var(--surface);border:1px solid var(--border);padding:20px;margin-bottom:12px;display:flex;gap:20px;align-items:flex-start;">
-          <div style="font-size:22px;font-weight:700;color:var(--border);font-family:'Playfair Display',serif;min-width:32px;">${s.number}</div>
-          <div style="flex:1;">
-            <div style="font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;">${s.title}</div>
-            ${s.bullets.map(b => `<div style="font-size:13px;color:#444;padding:3px 0;padding-left:12px;border-left:2px solid var(--gold);">${b}</div>`).join('')}
-            <div style="margin-top:10px;font-size:12px;color:var(--muted);font-style:italic;">${s.speaker_note}</div>
-          </div>
-        </div>`;
-      });
-      html += '</div>';
-
-      const existing = document.getElementById('slides-output');
-      if (existing) existing.remove();
-      const div = document.createElement('div');
-      div.id = 'slides-output';
-      div.innerHTML = html;
-      document.getElementById('section-studio').appendChild(div);
-
-      statusEl.innerHTML = '<span class="studio-card-status status-ready">Ready</span>';
-      btn.textContent = 'Regenerate';
-      btn.disabled = false;
-    } catch(e) {
-      btn.textContent = 'Try Again';
-      btn.disabled = false;
-    }
-  }
-
+  function removeThinking() { const t = document.querySelector('.chat-msg.thinking'); if(t) t.remove(); }
 </script>
 </body>
 </html>

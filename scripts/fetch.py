@@ -12,16 +12,31 @@ import re
 from datetime import datetime, timezone
 
 SOURCES = {
+    # VC / Investor
     "a16z": "https://a16z.com/feed/",
+    "First Round Review": "https://firstround.com/review/feed/",
+    "Sequoia": "https://www.sequoiacap.com/feed/",
+    # Tech news
     "TechCrunch": "https://techcrunch.com/feed/",
+    "The Verge": "https://www.theverge.com/rss/index.xml",
+    "Wired": "https://www.wired.com/feed/rss",
+    "Ars Technica": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+    # AI specific
     "MIT Tech Review": "https://www.technologyreview.com/feed/",
+    "VentureBeat AI": "https://venturebeat.com/category/ai/feed/",
+    "Import AI": "https://importai.substack.com/feed",
+    # Entrepreneurship
     "Hacker News": "https://hnrss.org/frontpage",
+    "Stratechery": "https://stratechery.com/feed/",
+    # Policy / Research
+    "Stanford HAI": "https://hai.stanford.edu/news/rss.xml",
+    "Brookings Tech": "https://www.brookings.edu/topic/technology-innovation/feed/",
 }
 
 X_ACCOUNTS = [
-    "sama", "pmarca", "garrytan", "paulg", "jvisserlabs",
+    "sama", "pmarca", "garrytan", "paulg",
     "benedictevans", "karpathy", "ylecun", "emollick",
-    "naval", "jason", "levelsio", "OpenAI", "AnthropicAI",
+    "naval", "jason", "OpenAI", "AnthropicAI",
     "GoogleDeepMind", "mmitchell_ai"
 ]
 
@@ -55,22 +70,41 @@ def is_duplicate(title, seen_titles, threshold=0.6):
 def fetch_articles():
     articles = []
     seen_titles = []
+    # Cap per source at 3 to ensure diversity
+    PER_SOURCE_CAP = 3
+
     for source_name, url in SOURCES.items():
-        feed = feedparser.parse(url)
-        for entry in feed.entries[:6]:
-            title = entry.get("title", "")
-            if not title:
-                continue
-            if is_duplicate(title, seen_titles):
-                continue
-            seen_titles.append(title)
-            articles.append({
-                "source": source_name,
-                "title": title,
-                "summary": entry.get("summary", ""),
-                "link": entry.get("link", ""),
-                "date": entry.get("published", datetime.now(timezone.utc).strftime("%Y-%m-%d")),
-            })
+        try:
+            feed = feedparser.parse(url)
+            count = 0
+            for entry in feed.entries[:10]:
+                if count >= PER_SOURCE_CAP:
+                    break
+                title = entry.get("title", "")
+                if not title:
+                    continue
+                # Filter to AI/entrepreneurship relevant only
+                title_lower = title.lower()
+                summary_lower = entry.get("summary", "").lower()
+                combined = title_lower + " " + summary_lower
+                if not any(kw in combined for kw in AI_KEYWORDS):
+                    continue
+                if is_duplicate(title, seen_titles):
+                    continue
+                seen_titles.append(title)
+                articles.append({
+                    "source": source_name,
+                    "title": title,
+                    "summary": entry.get("summary", ""),
+                    "link": entry.get("link", ""),
+                    "date": entry.get("published", datetime.now(timezone.utc).strftime("%Y-%m-%d")),
+                    "tag": entry.get("tags", [{}])[0].get("term", "AI & Tech") if entry.get("tags") else "AI & Tech",
+                })
+                count += 1
+        except Exception as e:
+            print(f"Feed error ({source_name}): {e}")
+            continue
+
     return articles
 
 def fetch_x_posts():
@@ -96,6 +130,7 @@ def fetch_x_posts():
                     "summary": "",
                     "link": entry.get("link", f"https://x.com/{account}"),
                     "date": entry.get("published", datetime.now(timezone.utc).strftime("%Y-%m-%d")),
+                    "tag": "X / Social",
                 })
         except:
             continue
